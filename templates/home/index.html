@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>OUTINZ</title>
+</head>
+<body>
+
+    <div class="loader">
+        <div class="loader-inner">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="header" id="home">
+            <!-- navigation and menu -->
+            <div class="header-up">
+                <nav>
+                    <div class="left-nav">
+                        <a href="#home">
+                            <img src="{% static 'images/ticket logo gray png.png' %}" alt="LOGO">
+                        </a>
+                    </div>
+                    <div class="center-nav">
+                        <ul>
+                            <li class="list-item">
+                                <a href="#home">home</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#services">services</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#events">events</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="#contact-us">contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right-nav">
+                        {% if user.is_authenticated %}
+                            {% if group == 'admin' %}
+                                <a href="{% url 'admin-admin:admin-panel' user %}" class="login-btn">Panel</a>
+                            {% elif group == 'store' %}
+                                <a href="{% url 'party:provider-panel' user %}" class="login-btn">Panel</a>
+                            {% else %}    
+                                <a href="{% url 'account:user-profile' user %}" class="login-btn">Profile</a>
+                            
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'account:login' %}" class="login-btn">log in</a>
+                            <a href="{% url 'account:register' %}" class="register-btn">register</a>
+                        {% endif %}
+                    </div>
+                    <button type="button" class="hamburger-menu">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </button>
+                </nav>
+                <ul class="menu">
+                    <a href="#home">
+                        <li class="menu-item">home</li>
+                    </a>
+                    <a href="#services">
+                        <li class="menu-item">services</li>
+                    </a>
+                    <a href="#events">
+                        <li class="menu-item">events</li>
+                    </a>
+                    <a href="#contact-us">
+                        <li class="menu-item">contact us</li>
+                    </a>
+                    {% if user.is_authenticated %}
+                        {% if group == 'admin' %}
+                            <a href="{% url 'admin-admin:admin-panel' user %}">
+                                <li class="menu-item">Panel</li>
+                            </a>
+                        {% elif group == 'customer' %}
+                            <a href="{% url 'account:user-profile' user %}">
+                                <li class="menu-item">Profile</li>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'party:provider-panel' user %}">
+                                <li class="menu-item">Panel</li>
+                            </a>
+                        {% endif %}
+                
+                    {% else %}
+                        <a href="{% url 'account:login' %}">
+                            <li class="menu-item">Login</li>
+                        </a>
+                        <a href="{% url 'account:register' %}">
+                            <li class="menu-item">Register</li>
+                        </a>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- landing page image and description -->
+            <div class="header-bg">
+                <img src="{% static 'images/pexels-edoardo-tommasini-2034851.jpg' %}" alt="ContactUs">
+            </div>
+            <!-- header down title -->
+            <div class="header-down">
+                <h1 class="header-down-title">on outinz
+                    <span class="type" >you can <span data-wait="3000" data-words='[ "Create Your Events", "Buy Events Tickets" , "Rate Your Events" ,"Invite People To Attend Your Consert" , "Sell your Event Tickets" ]'></span></span>
+                </h1>       
+            </div>
+        </div>
+    
+        <button type="button" class="goToUp-btn">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    
+        <section class="services" id="services">
+    
+            <div class="services-img">
+                <img src="{% static 'images/21081.jpg' %}">
+            </div>
+            <div class="services-content">
+                <div class="services-title">
+                    <h2>our Services</h2>
+                </div>
+                <p class="sevices-desc">It is an online platform showcase events, traveling and both indoor & outdoor experiences. outinz want bring fun by allowing people to share where they go, where they want to go and get people opinion on this locations by getting likes. Events organiser can start an event here and share their details on how people could access this events.</p>
+            </div>
+        </section>
+    
+        <section class="showDetails-section">
+            <div class="showDetails-bg"></div>
+            <div class="details">
+                <div class="detail">
+                    <span class="number" data-number="{{customers_number}}">0</span>
+                    <span class="detail-title">Customers</span>
+                </div>
+                
+                <div class="detail">
+                    <span class="number" data-number="{{party_ticket_number}}">0</span>
+                    <span class="detail-title">Tickets</span>
+                </div>
+                
+                <!-- <div class="detail">
+                    <span class="number" data-number="555">0</span>
+                    <span class="detail-title">happyCustomers</span>
+                </div> -->
+            </div>
+        </section>
+    
+        <section class="events-section" id="events">
+            <div class="events-header">
+                <div class="title">
+                    <h2 class="events-title">Events</h2>
+                </div>
+                <div class="Event-btns">
+                    <button type="button" class="prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+                    </button>
+                    <button type="button" class="next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+                    </button>
+                </div>
+            </div>
+    
+            <div class="cards-container">
+                <div class="cards" style="transform:translateX(300px)">
+                    <a href="{% url 'party:party-ticket-list' %}" class="card">
+                        <div class="img">
+                            <img src="{% static 'images/pexels-andrea-piacquadio-787961.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">Parties</h2>
+                            <p class="card-desc">you can buy parties ticket from here. click to see parties tickets</p>
+                        </div>
+                        <div class="tickets-number">
+                            <span>Number of tickets :</span>
+                            <span>{{party_ticket_number}}</span>
+                        </div>
+                    </a>
+                    <a href="#events" class="card">
+                        <div class="img">
+                            <img src="{% static 'images/live-music-2219036_640.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">concerts</h2>
+                            <p class="card-desc">you can buy concerts ticket from here. click to see concerts tickets</p>
+                        </div>
+                        <div class="tickets-number">
+                            <span>coming soon</span>
+                        </div>
+                    </a>
+                    <a href="#events" class="card">
+                        <div class="img">
+                            <img src="{% static 'images/pexels-quintin-gellar-321159.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">AirPlanes</h2>
+                            <p class="card-desc">you can buy airplanes ticket from here. click to see airplanes ticket</p>
+                        </div>
+                        <div class="tickets-number">
+                            <span>coming soon</span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <a href="#events" class="card">
+                        <div class="img">
+                            <img src="{% static 'images/restaurant-1837150__480.jpg' %}">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">hotels</h2>
+                            <p class="card-desc">you can book hotel room from here. click to see hotel room information</p>
+                        </div>
+                        <div class="tickets-number">
+                            <span>coming soon</span>
+                            <span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    
+        <section class="contactus-section" id="contact-us">
+            <div class="left-contact">
+                <div class="left-contact-title">
+                    <div class="left-descs">
+                        <h2 class="left-title">Let's Talk</h2>
+                        <div class="left-desc">To request to add your store or to tell us a problem or comment or criticism or... , contact us directly or fill out the form and we will contact you quickly.</div>
+                    </div>
+                </div>
+                <form action=""  class="get-user-infos" autocomplete="off" method="post">
+                    {% csrf_token %}
+                    <div class="input">
+                        <label for="name-input">Your Name</label>
+                        <input type="text" name="sender_name" id="name-input" data-next="Email-input" required maxlength="20">
+                    </div>
+                    <div class="input">
+                        <label for="Email-input">Your Email</label>
+                        <input type="email" name="sender_email" id="Email-input" data-next="message-input" required maxlength="30">
+                    </div>
+                    <div class="input">
+                        <label for="message-input">Your Message</label>
+                        <textarea name="message" id="message-input" cols="30" rows="10" required></textarea>
+                    </div>
+                    <div class="input">
+                        <input type="submit" type="submit" onclick="sendEmail(); reset(); return false"  value="Send Message">
+                    </div>
+                </form>
+                {% if messages %}
+                <div class="left-contact-title">
+                    <div class="left-descs">
+                        {% for message in messages %}
+                        <div class="left-desc">{{message}}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="right-contact">
+                <div class="right-img">
+                    <img src="{% static 'images/2480553.jpg' %}">
+                </div>
+                <div class="right-descs">
+                    <div class="contact-location contact">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg>
+                        <a>Lagos state , Nigeria</a>
+                    </div>
+                    <div class="contact-Call contact">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
+                        <a href="tel:+905338472863">+90 533 844 98 73</a>
+                    </div>
+                    <div class="contact-EmailAddress contact">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:outinz.outinz@gmail.com">outinz.outinz@gmail.com</a>
+                    </div>
+                    <div class="contact-EmailAddress contact">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p>If there are any problems in the contact form, please contact us at the above number or send your feedback manually to the Gmail above.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer id="about-us">
+            <div class="footer-desc">
+                <div class="desc">Outinz want to bring fun by allowing people to share where they go, where they want to go and get people opinion on this locations by getting likes. Events organiser can start an event here and share their details on how people could access this events.</div>
+                <div class="social">
+                    <p>Follow Us In Instagram</p>
+                    <a href="https://www.instagram.com/r_outinz/?igshid=YmMyMTA2M2Y%3D">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="copy-write">
+                &copy All material and intellectual rights of this site belong to outinz
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

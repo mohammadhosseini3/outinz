@@ -1,0 +1,274 @@
+
+*{
+    margin:0;
+    padding:0;
+    -webkit-box-sizing:border-box;
+            box-sizing:border-box;
+}
+
+body{
+    background:#f2eaff;
+}
+
+.container{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    gap:25px;
+}
+
+.main-section{
+    color:rgb(139, 139, 139);
+    position:relative;
+    width:-webkit-fit-content;
+    width:-moz-fit-content;
+    width:fit-content;
+    left:20px;
+    margin:10px 0; 
+}
+
+.main-section a{
+    color:#6e0eff;
+    text-decoration:none;
+    -webkit-transition:color 0.15s ease-out;
+    -o-transition:color 0.15s ease-out;
+    transition:color 0.15s ease-out;
+}
+
+.main-section a:last-child{
+    color:rgb(139, 139, 139);
+}
+
+.main-section a:hover:not(.main-section a:last-child){
+    color:#8432ff;
+}
+
+.add-content{
+    width:90%;
+    margin:0 auto;
+}
+
+.add-content form{
+    padding:25px 10px;
+    border:2px solid #6600ff;
+    border-radius:10px;
+    position:relative;
+    text-align:center;
+}
+
+.add-content form h2{
+    color:#6600ff;
+    background:#f2eaff;
+    padding:0 10px;
+    font-family: 'Lobster', cursive;
+    position:absolute;
+    top:-20px;
+    left:20px;
+}
+
+.add-content form .inputs{
+    display:-ms-grid;
+    display:grid;
+    -ms-grid-columns: 1fr 30px 1fr;
+    grid-template-columns: repeat(2,1fr);
+    gap:30px;
+}
+.add-content form .input{
+    position:relative;
+}
+
+.add-content .modal{
+    display:none;
+    text-align:center;
+    font-size:1rem;
+    border-radius:10px;
+    background:red;
+    font-family: 'Titillium Web', sans-serif;
+    color:#f2eaff;
+}
+
+.add-content .modal ul {
+    list-style:none;
+}
+.add-content form .input input{
+    width:100%;
+    font-size:1.2rem;
+    color:#6600ff;
+    padding:7px 14px;
+    background: none;
+    border:1px solid rgb(119, 32, 249);
+    outline:none;
+    border-radius:10px;
+}
+
+.add-content form .input:nth-child(3),
+.add-content form .input:last-child{
+    grid-column:1/-1
+}
+
+.add-content form .input .show-pass{
+    position:absolute;
+    right:5px;
+    top:5px;
+    cursor:pointer;
+}
+
+.add-content  form .input .show-pass .material-symbols-outlined{
+    color:#6600ff;
+    display:inline-block;
+    pointer-events: none;
+}
+
+.add-content form .input textarea{
+    width:100%;
+    height:100px;
+    font-size:1.2rem;
+    color:#6600ff;
+    padding:20px 10px;
+    background:none;
+    resize:none;
+    border:1px solid rgb(119, 32, 249);
+    outline:none;
+    border-radius:10px;
+}
+
+
+.add-content form .input .input-title{
+    display:inline-block;
+    position:absolute;
+    left:15px;
+    top:-10px;
+    background:#f2eaff;
+    color:rgb(119, 32, 249);
+    padding:0 10px;
+}
+
+.add-content form select{
+    background:#6a0afb;
+    width:100%;
+    border-radius:10px;
+    border:none;
+    color:#f2eaff;
+    cursor:pointer;
+    padding:5px 20px;
+    font-size:1rem;
+}
+
+.add-content .add-ticket{
+    padding:40px 10px;
+}
+
+.add-content form .input-category .input-title{
+    background:none;
+    top:-20px;
+    left:0;
+}
+
+.add-content form .input .star{
+    color:rgb(186, 0, 0);
+    position:absolute;
+    top:-15px;
+    right:10px;
+}
+
+.add-content form .input.invalid input{
+    border-color: rgb(255, 77, 77);
+    color:rgb(255, 77, 77);
+    caret-color: rgb(255, 77, 77);
+}
+
+.add-content form .input.invalid span{
+    color:rgb(255, 77, 77) !important;
+}
+
+.add-content form .input.invalid p{
+    color:rgb(255, 77, 77);
+    margin-top:10px;
+    font-family: 'Righteous', cursive;
+}
+
+.add-content form .addTicket-btn{
+    margin-top:20px;
+    background:#4800b4;
+    border:none;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    color:#f2eaff;
+    -webkit-transition:0.15s ease-out;
+    -o-transition:0.15s ease-out;
+    transition:0.15s ease-out;
+}
+
+.add-content form .addTicket-btn:hover{
+    background:#6600ff;
+}
+
+.add-ticket .add-ticket-tips ul{
+    background:#4800b4;
+    width:100%;
+    margin:20px 0;
+    list-style: none;
+    padding:5px 10px;
+    border-radius:10px;
+}
+
+.add-ticket .add-ticket-tips li{
+    color:#d5b9ff;
+    font-family: 'Righteous', cursive;
+}
+
+.add-content .modal{
+    display:none;
+    text-align:center;
+    font-size:1rem;
+    border-radius:10px;
+    background:red;
+    font-family: 'Titillium Web', sans-serif;
+    color:#f2eaff;
+}
+
+.add-content .modal ul {
+    list-style:none;
+}
+
+.add-content form .input.capacity{
+    grid-column:1/-1 !important;
+}
+
+/* icons */
+.material-symbols-rounded {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 100,
+    'GRAD' 200,
+    'opsz' 48;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+/* media queries */
+
+@media screen and (max-width:720px){
+    .add-content form .input{
+        grid-column:1/-1
+    }
+
+    .add-content form h2{
+        font-size:1rem;
+        top:-15px;
+    }
+}

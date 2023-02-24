@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
+    <title>Outinz Tickets</title>
+</head>
+<body>
+        <div class="container">
+            <div class="top-section">
+                <div class="container-title">
+                    <button  class="back-history" onclick="window.location.href='/'"">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"/></svg>
+                        Back To Home
+                    </button>
+                    <h1 class="title">Outinz Tickets</h1>
+                </div>
+                <div class="ticket-type">   
+                    <div class="select-box">
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" class="radio" id="all" name="filter">
+                                <label for="all">All</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" class="radio" id="last-10" name="filter">
+                                <label for="last-10">Last 10 Tickets</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" class="radio" id="cheapest" name="filter">
+                                <label for="cheapest">Cheapest</label>
+                            </div>
+                        </div>
+                        <div class="selected">
+                            <span class="selected-title">Select Ticket Filter</span>
+                            <span class="material-symbols-rounded">expand_more</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="products">
+                {% for ticket in party_ticket_list %}
+                <div class="ticket">
+                    <div class="top-ticket">
+                        <div class="ticket-title-section">
+                            <div class="category">{{ticket.name}} Party</div>
+                            <div class="remain-sits"></div>
+                        </div>
+                        <div class="ticket-informations">
+                            <div class="ticket-information">
+                                <h4 class="ticket-info-title">Provider</h4>
+                                <p class="ticket-info">{{ticket.provider.name}}</p>
+                            </div>
+                            <div class="ticket-information">
+                                <h4 class="ticket-info-title">Capacity</h4>
+                                <p class="ticket-info">Unlimited</p>
+                            </div>
+                            <div class="ticket-information">
+                                <h4 class="ticket-info-title">Ticket Price</h4>
+                                <p class="ticket-info">{{ticket.price}} ₺</p>
+                            </div>
+                            <div class="ticket-information">
+                                <h4 class="ticket-info-title">Start Date(D/M/Y)</h4>
+                                <p class="ticket-info">{{ticket.start_date|date:'d/m/Y'}}</p>
+                            </div>
+                            <div class="ticket-information">
+                                <h4 class="ticket-info-title">Start Hour</h4>
+                                <p class="ticket-info">{{ticket.start_date|date:'H:i a'}}</p>
+                            </div>
+                        </div>
+                        <div class="ticket-desc">
+                            <h4 class="desc-title">Ticket Description</h4>
+                            {% if ticket.description %}
+                                <p class="desc">{{ticket.description}}</p>
+                            {% else %}
+                                <p class="desc">There is no description.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <a href="{% url 'party:party-ticket-detail' ticket.id %}" class="bottom-ticket">
+                        <button class="show-allDetails">More information and purchase</button>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    <script src="{% static 'js/products.js' %}"></script>
+</body>
+</html>

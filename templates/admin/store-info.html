@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="{% static 'css/store-info.css' %}">
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
+    <title>Outinz Provider info</title>
+</head>
+<body>
+    <div class="container" >
+        <div class="sections">
+            <span><a href="{% url 'home:home' %}">Home</a> / <a href="{% url 'admin-admin:admin-panel' user %}">Admin Panel</a> / <a href=".">ProviderProfile</a> </span>
+        </div>
+
+        <div class="content">
+            <!-- Provider profile section -->
+            <div class="storeProfile">
+              <div class="profile">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm130.7 57.9c-4.2-13.6 7.1-25.9 21.3-25.9H364.5c14.2 0 25.5 12.4 21.3 25.9C369 368.4 318.2 408 258.2 408s-110.8-39.6-127.5-94.1zM144.4 192a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+              </div>
+              <div class="profile-desc">
+                <h4 class="username">@{{store.username}}</h4>
+                <h2 class="fullname">{{store.name}}</h2>
+              </div>
+              <div class="btns">
+                <button onclick="window.location.href='/panel/delete-store/{{store.id}}/'" class="delete-store">Delete Provider</button>
+                <button class="edit-store">Edit Provider</button>
+              </div>
+            </div>
+            <!-- Provider information section -->
+            <div class="store-info">
+                <div class=" store-information">
+                    <h3 class="info-title">Provider Id</h3>
+                    <p class="storeInfo">{{store.id}}</p>
+                </div>
+                <div class=" store-information">
+                    <h3 class="info-title">Provider Name</h3>
+                    <p class="storeInfo">{{store.name}}</p>
+                </div> 
+                <div class=" store-information">
+                    <h3 class="info-title">Provider Venue</h3>
+                    <p class="storeInfo">{{store.address}}</p>
+                </div> 
+                <div class=" store-information">
+                    <h3 class="info-title">Provider Username</h3>
+                    <p class="storeInfo">{{store.username}}</p>
+                </div> 
+                <div class=" store-information">
+                    <h3 class="info-title">Provider Email</h3>
+                    <p class="storeInfo">{{store.email}}</p>
+                </div> 
+                <div class=" store-information">
+                    <h3 class="info-title">Provider Type</h3>
+                    <p class="storeInfo">{{store.username.groups.all.0}}</p>
+                </div>
+            </div>
+            <!-- Provider purchased tickets -->
+            <div class="purchased-tickets-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Ticket Type</th>
+                            <th>Ticket Status</th>
+                            <th>Ticket Capacity</th>
+                            <th>Ticket Remaining</th>
+                            <th>Start Date</th>
+                            <th>Start Hour</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in tickets %}
+                        <tr>
+                            <td>{{ticket.id}}</td>
+                            <td>{{ticket.name}} Party</td>
+                            <td>{{ticket.get_status_display}}</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>{{ticket.start_date|date:'d/m/Y'}}</td>
+                            <td>{{ticket.start_date|date:'H:i'}}</td>
+                            <td>{{ticket.price}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="edit-store-form" style="display:none;">
+        <button class="back-to-infos">Back To Informations</button>
+        <!-- edit form -->
+        <form action="" class="signUp-form" >
+            <div class="inputs-desc">
+                <ul>
+                    <li>Please enter your details carefully so you don't run into problems later</li>
+                    <li>All inputs aren't required . just enter the information you want to change</li>
+                </ul>
+            </div>
+            <div class="form-title">
+                <h4>Enter your details below</h4>
+            </div>
+            <div class="form-inputs">
+                <div class="singup-inputs-container">
+                    <div class="input-container">
+                        <input type="text" class="name-input" maxlength="16">
+                        <span class="input-ph">Provider name</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" class="family-input" maxlength="16">
+                        <span class="input-ph">Venue</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" class="email-input">
+                        <span class="input-ph">Provider Email</span>         
+                        <p>The email is invalid</p>
+                    </div>
+                </div>
+                <input type="submit" class="submit" value="Edit Provider">
+            </div>    
+        </form>
+    </div>
+
+    <script src="{ % static 'js/store-info.js' %}"></script>
+</body>
+</html>

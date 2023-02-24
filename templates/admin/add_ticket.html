@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/add-ticket.css' %}">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,100,0,200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
+    <title>OUTINZ Add Ticket</title>
+</head>
+<body>
+    <div class="container">
+        <div class="main-section">
+            <span><a href="/">Home</a> / <a href="{% url 'admin-admin:admin-panel' user %}">Admin Panel</a> / <a href=".">Add Ticket</a> </span>
+        </div>
+        <div class="add-content">
+            <!-- {{form}} -->
+            <form action="" class="add-ticket" method="post">
+                {% csrf_token %}
+                <h2>Change Ticket Information</h2>
+                <div class="inputs">
+                    <!-- <div class="input input-category">
+                        <span class="input-title">Ticket Category</span>
+                        <select name="Ticket category">
+                            <option value="party">party</option>
+                            <option value="concert">concert</option>
+                        </select>
+                    </div> -->
+
+                    <div class="input">
+                        <span class="input-title" >Ticket Name</span>
+                        <input type="text" name="name" class="ticket-input" >
+                        <p style="display:none;">Provider username not found</p>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Price</span>
+                        <input type="number" name="price">
+                        <p></p>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket's Provider UserName</span>
+                        <input type="text" name="provider" class="ticket-input" >
+                        <p style="display:none;">Provider username not found</p>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Start Date</span>
+                        <input type="date" name="start-date" class="ticket-input">
+                        <p style="display:none">Date is Invalid</p>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Start Hour</span>
+                        <input type="time" name="start-hour" class="ticket-input">
+                        <p style="display:none">Date is Invalid</p>
+                    </div>
+                    <!-- <div class="input capacity">
+                        <span class="input-title " >Ticket Capacity</span>
+                        <input type="number" name="ticket-capacity ticket-input" class="ticket-capacity" min="0" > 
+                        <p></p>
+                    </div> -->
+                    <div class="input">
+                        <span class="input-title" >Ticket Description</span>
+                        <textarea name="description" class="ticket-desc" rows="10"></textarea> 
+                    </div>
+                </div>
+                <input type="submit" value="Add ticket" data-modalTarget="add-store-modal" class="addTicket-btn">
+            </form>
+            {% if messages %}
+            <div class="sucess-modal active">
+                <div class="success">
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{% static 'js/add-ticket.js' %}"></script>
+</body>
+</html>

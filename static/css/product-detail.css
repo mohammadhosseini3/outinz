@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&family=Vollkorn+SC&display=swap');
+
+
+*{
+    margin:0;
+    padding:0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+body{
+    background:rgb(236, 236, 236);
+}
+
+.title{
+    color:rgb(63, 0, 126);
+    position:absolute;
+    width:100%;
+    top:50px;
+    text-align: center;
+    font-family: 'Vollkorn SC', serif;
+}
+
+.container{
+    height:100vh;
+    display:-ms-grid;
+    display:grid;
+    place-items: center;
+}
+
+.container .ticket-details{
+    background:#fff;
+    padding:20px;
+    -webkit-box-shadow:0px 0px solid rgba(0, 0, 0, 0.1);
+            box-shadow:0px 0px solid rgba(0, 0, 0, 0.1);
+    border-radius:22px;
+    width:95%;
+    height:-webkit-fit-content;
+    height:-moz-fit-content;
+    height:fit-content;
+    display:-ms-grid;
+    display:grid;
+    -ms-grid-columns:1fr 20px 1fr;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.container .ticket-details .content{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+    -webkit-box-pack:justify;
+        -ms-flex-pack:justify;
+            justify-content:space-between;
+    gap:25px;
+    padding:5px 10px; 
+}
+
+.container .ticket-details .content .ticket-btns{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack:center;
+        -ms-flex-pack:center;
+            justify-content:center;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+}
+
+.container .ticket-details .content .ticket-btns button{
+    padding:10px 30px;
+    border-radius:12px;
+    border:none;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack:center;
+        -ms-flex-pack:center;
+            justify-content:center;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+    gap:10px;
+    background:rgba(198, 141, 255, 0.65);
+    color:rgb(53, 0, 106);
+    font-size:1.25rem;
+    font-family: 'M PLUS 1', sans-serif;
+    cursor:pointer;
+    -webkit-transition:background-color 0.15s ease-out;
+    -o-transition:background-color 0.15s ease-out;
+    transition:background-color 0.15s ease-out;
+}
+
+.container .ticket-details .content .ticket-btns button span{}
+
+.container .ticket-details .content .ticket-btns button:hover{
+    background:rgba(148, 55, 240, 0.65);
+}
+
+
+.container .ticket-details .content .ticket-desc{
+    text-align:justify;
+    color:rgba(53, 0, 106, 0.735);
+    font-size:1.5rem;
+    line-height:1.75rem;
+    font-family: 'M PLUS 1', sans-serif;
+}
+
+.container .ticket-details  .details{
+    display:-ms-grid;
+    display:grid;
+    -ms-grid-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2,1fr);
+    grid-auto-rows:75px;
+    place-items:center;
+    position:relative;
+    width:100%;
+    height:100%;
+    background:rgb(53, 0, 106);
+    border-radius:12px;
+    padding:20px;
+}
+
+.container .ticket-details  .details .backBtn{
+    position:absolute;
+    top:0;
+    left:0;
+    border:none;
+    outline:none;
+    background:#fff;
+    padding:5px 10px;
+    border-radius:0 0 22px 0;
+    cursor:pointer;
+    color:rgb(53, 0, 106);
+}
+
+.container .ticket-details  .details .backBtn svg{
+    fill:rgb(53, 0, 106);
+    width:1.5rem;
+    height:1.5rem;
+}
+
+.container .ticket-details  .details .detail{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+    -webkit-box-pack:start;
+        -ms-flex-pack:start;
+            justify-content:flex-start;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+    gap:10px;
+}
+
+.container .ticket-details .detail .detail-title{
+    color:rgba(205, 169, 255, 0.787);
+    font-family: 'Vollkorn SC', serif;
+    text-align:center;
+}
+
+.container .ticket-details .detail .ticket-detail{
+    color:#fff;
+    font-family: 'M PLUS 1', sans-serif;
+    text-align:center;
+}
+
+.content .ticket-btns .added-txt{
+    background:rgba(205, 169, 255, 0.471);
+    color:rgb(53, 0, 106);
+    border-radius:8px;
+    border:2px dashed rgb(53, 0, 106);
+    font-size:1.25rem;
+    text-align: center;
+    padding:12px 24px;
+    font-family: 'M PLUS 1', sans-serif;
+}
+
+.content .ticket-btns svg{
+    fill:rgb(53, 0, 106);
+    width:1.25rem;
+    height:1.25rem;
+}
+
+/* icon  */
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+/* media queries */
+
+@media (max-width: 900px){
+    .container{
+        margin-top:0 50px;
+    }
+    .container .ticket-details{
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        gap:25px;
+    }
+    .container .ticket-details .content .ticket-desc{
+        font-size:1.25rem;
+        line-height:1.5rem;
+    }
+    .title{
+        font-size:1.5rem;
+        top:10px;
+    }
+}
+
+@media (max-width: 720px){
+    .container{
+        margin-top:50px !important;
+    }
+    .container .ticket-details{
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        gap:25px;
+    }
+    .container .ticket-details .content .ticket-desc{
+        font-size:1.25rem;
+        line-height:1.5rem;
+    }
+    .title{
+        font-size:1.5rem;
+        top:10px;
+    }
+}
+
+@media (max-width: 480px){
+    .container{
+        margin-top:100px 50px !important;
+    }
+    .container .ticket-details{
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        gap:25px;
+    }
+    .container .ticket-details .content .ticket-desc{
+        font-size:1.25rem;
+        line-height:1.5rem;
+    }
+
+    .container .ticket-details .details .detail{
+        font-size:0.8rem;
+    }
+
+    .container .ticket-details .content .ticket-btns button{
+        font-size:1rem;
+    }
+
+    .title{
+        font-size:1.5rem;
+        top:10px;
+    }
+}

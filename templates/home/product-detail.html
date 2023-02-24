@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="{% static 'css/product-detail.css' %}">
+    <title>Outinz Ticket Details</title>
+</head>
+<body>
+    <h1 class="title">Outinz Ticket Details</h2>
+    <div class="container">
+        <div class="ticket-details">
+            <div class="details">
+                <div class="detail">
+                    <span class="detail-title">Ticket Type</span>
+                    <span class="ticket-detail">{{ticket.name}} Party</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Provider</span>
+                    <span class="ticket-detail">{{ticket.provider.name}}</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Store Address</span>
+                    <span class="ticket-detail">{{ticket.provider.address}}</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Start Date</span>
+                    <span class="ticket-detail">{{ticket.start_date|date:"d/m/Y"}}</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Start Hour</span>
+                    <span class="ticket-detail">{{ticket.start_date|date:'H:i a'}}</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Capacity</span>
+                    <span class="ticket-detail">Unlimited</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Available Ticekts</span>
+                    <span class="ticket-detail">--</span>
+                </div>
+                <div class="detail">
+                    <span class="detail-title">Price</span>
+                    <span class="ticket-detail">{{ticket.price}} ₺</span>
+                </div>
+                <div class="backBtn" >
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </div>
+            </div>
+            <div class="content">
+                {% if ticket.description %}
+                    <div class="ticket-desc">{{ticket.description}}</div>
+                {% else %}
+                    <div class="ticket-desc">There is no description.</div>
+                {% endif %}
+                <div class="ticket-btns">
+                    <div class="btns">
+                        {% if user.is_authenticated %}
+
+                            {% if group == 'customer' %}
+                                <button onclick="window.location.href='/account/add-to-cart/{{ticket.id}}/'" class="add" >
+                                    Add to cart
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                                </button>
+                            {% elif group == 'store' %}
+                                <button onclick="window.location.href='/party/provider/{{user}}/'" class="add">
+                                    Panel
+                                </button>  
+                            {% else %}
+                                <button onclick="window.location.href='/panel/{{user}}/'" class="add">
+                                    Panel
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            <button onclick="window.location.href='/account/login/'" class="add">
+                                First you need to login
+                            </button>  
+                        {% endif %}
+                    </div>
+                    {% for message in messages %}
+                    <div class="added-txt">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/product-detail.js' %}"></script>
+</body>
+</html>

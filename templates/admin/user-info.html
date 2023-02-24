@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="{% static 'css/user-info.css' %}">
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
+    <title>Outinz user info</title>
+</head>
+<body>
+    <div class="container" >
+        <div class="sections">
+            <span><a href="/">Home</a> / <a href="{% url 'admin-admin:admin-panel' user %}">Admin Panel</a> / <a href=".">userProfile</a> </span>
+        </div>
+
+        <div class="content">
+            <!-- user profile section -->
+            <div class="userProfile">
+              <div class="profile">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm130.7 57.9c-4.2-13.6 7.1-25.9 21.3-25.9H364.5c14.2 0 25.5 12.4 21.3 25.9C369 368.4 318.2 408 258.2 408s-110.8-39.6-127.5-94.1zM144.4 192a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+              </div>
+              <div class="profile-desc">
+                <h4 class="username">{{customer}}</h4>
+                <h2 class="fullname">{{customer.user.get_full_name}}</h2>
+              </div>
+              <div class="btns">
+                <button onclick="window.location.href='/panel/delete-user/{{customer.id}}'" class="delete-user">Delete User</button>
+                <button class="edit-user">Edit User</button>
+                <button class="edit-user addTicket-to-user-btn">Add Ticket</button>
+              </div>
+            </div>
+            <!-- user information section -->
+            <div class="user-info">
+                <div class=" user-information">
+                    <h3 class="info-title">User Id</h3>
+                    <p class="userInfo">{{customer.id}}</p>
+                </div>
+                <div class=" user-information">
+                    <h3 class="info-title">User first Name</h3>
+                    <p class="userInfo">{{customer.fname}}</p>
+                </div> 
+                <div class=" user-information">
+                    <h3 class="info-title">User last Name</h3>
+                    <p class="userInfo">{{customer.lname}}</p>
+                </div> 
+                <div class=" user-information">
+                    <h3 class="info-title">User Name</h3>
+                    <p class="userInfo">{{customer}}</p>
+                </div> 
+                <div class=" user-information">
+                    <h3 class="info-title">User Email</h3>
+                    <p class="userInfo">{{customer.email}}</p>
+                </div> 
+                <div class=" user-information">
+                    <h3 class="info-title">User Type</h3>
+                    <p class="userInfo">{{customer.user.groups.all.0}}</p>
+                </div>
+            </div>
+            <!-- user purchased tickets -->
+            <div class="purchased-tickets-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Provider User Name</th>
+                            <th>Ticket Type</th>
+                            <th>Ticket Status</th>
+                            <th>Venue</th>
+                            <th>Order Date</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cart_item in products %}
+                        <tr>
+                            <td>{{cart_item.id}}</td>
+                            <td>{{cart_item.product.provider}}</td>
+                            <td>Party</td>
+                            <td>{{cart_item.product.get_status_display}}</td>
+                            <td>{{cart_item.product.provider.address}}</td>
+                            <td>{{cart_item.created_date|date:'d/m/Y'}}</td>
+                            <td>{{cart_item.product.price}} ₺</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="edit-user-form" style="display:none;">
+        <button class="back-to-infos">Back To Informations</button>
+        <!-- edit form -->
+        <form action="" class="signUp-form" >
+            <div class="inputs-desc">
+                <ul>
+                    <li>Please enter your details carefully so you don't run into problems later</li>
+                    <li>All inputs aren't required . just enter the information you want to change</li>
+                    <li>The maximum length of the username should be 15 characters</li>
+                </ul>
+            </div>
+            <div class="form-title">
+                <h4>Enter your details below</h4>
+            </div>
+            <div class="form-inputs">
+                <div class="singup-inputs-container">
+                    <div class="input-container">
+                        <input type="text" class="name-input" maxlength="16">
+                        <span class="input-ph">first name</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" class="family-input" maxlength="16">
+                        <span class="input-ph">last name</span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" class="email-input">
+                        <span class="input-ph">Email</span>         
+                        <p>The email is invalid</p>
+                    </div>
+                    <div class="input-container userType-input-container">
+                        <span class="input-ph">UserType</span>         
+                        <select name="user type">
+                            <option value="Customer" selected>Customer</option>
+                            <option value="Provider">Provider</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="submit" class="submit" value="Edit User">
+            </div>    
+        </form>
+    </div>
+    <div class="add-ticket-form" style="display:none;">
+        <div class="backInfo-Btn">
+            <button class="back-to-infos">Back To Informations</button>
+        </div>
+        <!-- edit form -->
+        <div class="add-content">
+            <form action="" class="add-ticket">
+                <h2>Add Ticket To User</h2>
+                <div class="inputs">
+                    <div class="input">
+                        <span class="input-title" >Ticket's Provider Id</span>
+                        <input type="text" name="ticket-start-date" class="ticket-input">
+                        <p style="display:none">Id is Invalid</p>
+                    </div>
+                </div>
+                <input type="submit" value="Add ticket" class="addTicket-btn">
+            </form>
+        </div>
+        <div class="modal-add-ticket-details active">
+            <div class="ticket-info-tips">
+                Make sure that the ticket information is as follows. If not, click Cancel. After accepting the ticket, it will be added to the user's purchased tickets
+            </div>
+            <div class="ticket-info">
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Id</h3>
+                    <p class="ticketInfo">1</p>
+                </div>
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Type</h3>
+                    <p class="ticketInfo">Concert</p>
+                </div>
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Status</h3>
+                    <p class="ticketInfo">selling</p>
+                </div>
+                <div class=" ticket-information">
+                    <h3 class="info-title">Provider User Name</h3>
+                    <p class="ticketInfo">mohammadallipour12</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Provider Venue</h3>
+                    <p class="ticketInfo">Cyprus hide hand</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Provider Email</h3>
+                    <p class="ticketInfo">MohammadaliPour1992@gmail.com</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Capacity</h3>
+                    <p class="ticketInfo">35</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket remaining</h3>
+                    <p class="ticketInfo">15</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket start date</h3>
+                    <p class="ticketInfo">15/7/2023</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket start hour</h3>
+                    <p class="ticketInfo">22:00</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Price</h3>
+                    <p class="ticketInfo">$ 150</p>
+                </div> 
+            </div>
+            <div class="add-ticket-btns">
+                <button id="cancel-btn" type="button">Cancel</button>
+                <button id="accept-btn" type="button">accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/user-info.js' %}"></script>
+</body>
+</html>
