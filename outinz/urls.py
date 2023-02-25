@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path,include
 from . import settings
 from django.conf.urls.static import static
-from admin_panel.views import UpdateServer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +26,5 @@ urlpatterns = [
     path('party/', include('parties.urls')),
     path('payment/', include('payment.urls')),
     path('', include('home.urls')),
-    path('update_server/', UpdateServer),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
