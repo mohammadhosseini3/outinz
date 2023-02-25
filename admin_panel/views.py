@@ -9,6 +9,20 @@ from django.contrib.auth.decorators import login_required
 from parties.models import PartyTicket,Store
 from django.shortcuts import get_object_or_404
 # Create your views here.
+from django.http import HttpResponse
+from git import Repo # 
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def UpdateServer(request):
+    if request.method == 'POST':
+        repo = Repo('./django-schools')
+        git = repo.git
+        git.checkout('master')
+        git.pull()
+        return HttpResponse('pulled_success')
+    return HttpResponse('get_request', status=400)
+
 @login_required(login_url="/account/login/")
 @allowed_users(['admin'])
 def AddStore(request):

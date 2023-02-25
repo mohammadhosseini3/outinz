@@ -4,10 +4,13 @@ braintree==4.18.1
 certifi==2022.12.7
 charset-normalizer==3.0.1
 Django==4.1.6
+gitdb==4.0.10
+GitPython==3.1.31
 idna==3.4
 pytz==2022.7.1
 requests==2.28.2
 six==1.16.0
+smmap==5.0.0
 sqlparse==0.4.3
 stripe==5.1.1
 urllib3==1.26.14
