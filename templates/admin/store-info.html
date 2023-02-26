@@ -27,7 +27,7 @@
                 <h2 class="fullname">{{store.name}}</h2>
               </div>
               <div class="btns">
-                <button onclick="window.location.href='/panel/delete-store/{{store.id}}/'" class="delete-store">Delete Provider</button>
+                <button class="delete-store">Delete Provider</button>
                 <button class="edit-store">Edit Provider</button>
               </div>
             </div>
@@ -125,6 +125,17 @@
         </form>
     </div>
 
-    <script src="{ % static 'js/store-info.js' %}"></script>
+    <div class="delete-modal">
+        <div class="content">
+            <h3>delete provider</h3>
+            <p>Are you sure you want to Delete this Provider?</p>
+        </div>
+        <div class="btns">
+            <button type="button" class="cancel-btn">Cancel</button>
+            <button onclick="window.location.href='/panel/delete-store/{{store.id}}/'" type="button" class="delete-btn">Delete</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/store-info.js' %}"></script>
 </body>
 </html>

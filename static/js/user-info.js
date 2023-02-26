@@ -13,6 +13,9 @@ let closeEditModalBtn = $.getElementById('cancel-btn')
 let forms = $.querySelectorAll('form')
 let ticketInput = $.querySelector('.add-content form .ticket-input')
 let emailInput = $.querySelector('.email-input')
+let deleteUserBtn = $.querySelector('.content .delete-user')
+let deleteUserModal = $.querySelector('.delete-modal')
+let deleteUserCancelBtn = $.querySelector('.delete-modal .cancel-btn')
 let formTarget , passTarget
 
 window.addEventListener('load',function(){
@@ -64,6 +67,15 @@ addTicketToUserBtn.addEventListener('click',function(event){
     if(ticketInput.value.trim()){
         editTicketModal.classList.add('active')
     }
+})
+
+// show and hide logout modal
+deleteUserBtn.addEventListener('click',function(){
+    deleteUserModal.classList.add('active')
+})
+
+deleteUserCancelBtn.addEventListener('click',function(){
+    deleteUserModal.classList.remove('active')
 })
 
 closeEditModalBtn.addEventListener('click',function(){
