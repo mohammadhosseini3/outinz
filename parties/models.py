@@ -31,5 +31,6 @@ class PartyTicket(models.Model):
         ('selling','Selling'),
     ]
     status = models.CharField(max_length=10,choices=TICKET_STATUS,default='Selling')
+
     def __str__(self):
         return f"{self.name}-{self.provider.name}-{self.price}-{self.status}"

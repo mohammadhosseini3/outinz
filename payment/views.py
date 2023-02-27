@@ -1,8 +1,8 @@
 from django.conf import settings
-from admin_panel.models import Cart
+from admin_panel.models import Cart,Customer
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.core.mail import send_mail
 import stripe
 from django.utils import timezone
@@ -33,8 +33,8 @@ def CreateProduct(request):
                 },
             customer_email = cart.customer.email,
             mode = "payment",
-            success_url = f"http://127.0.0.1:8000/payment/success/",
-            cancel_url = f"http://127.0.0.1:8000/payment/cancel/",
+            success_url = f"{request.scheme}://{request.META['HTTP_HOST']}/payment/success/",
+            cancel_url = f"{request.scheme}://{request.META['HTTP_HOST']}/payment/cancel/",
         )
         return redirect(checkout.url,code = 303)
 
@@ -50,30 +50,30 @@ def stripe_webhook(request):
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
         )
-        
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
+        # Invalid signaturename
         return HttpResponse(status=400)
+    
+    session = event['data']['object']
+    # if event['data']['object']['metadata']:
+    #         cart_id = event['data']['object']['metadata']['product_id']
+    # if event['type'] == "checkout.session.completed":
+    #     customer = session['']
 
-    if event['data']['object']['metadata']:
-        cart_id = event['data']['object']['metadata']['product_id']
-
-    # Handle the checkout.session.completed event
-    if event['type'] == 'checkout.session.completed':
-        customer_email = event['data']['object']['customer_details']['email']
-        customer = event['data']['object']['customer_details']['name']
-        cart = Cart.objects.get(id=cart_id)
+    if event["type"] == "charge.succeeded":
+        customer_email = session['billing_details']['email']
+        customer = get_object_or_404(Customer,email=customer_email)
+        cart = customer.cart_set.get()
         items = cart.items.filter(is_ordered=False)
-        items.update(is_ordered=True,created_date=timezone.now())
         subject = 'Payment was successful'
         message = f'Dear {customer}, thanks for your purchase.\nTickets: {",".join([item.product.name for item in items])}\nYour tickets code is {cart.ref_code}.\nKeep your code in secret.\nThanks'
         email_from = settings.EMAIL_HOST_USER
+        items.update(is_ordered=True,created_date=timezone.now())
         send_mail(subject,message,email_from,(customer_email,))
-    # elif event["type"] == "payment_intent.succeeded":
-    #     print("payment_intent.succeeded")
+
     return HttpResponse(status=200)
 
 
@@ -83,4 +83,4 @@ def success_page(request):
 
 def cancel_page(request):
     context={}
-    return render(request,"payment/success.html",context)
+    return render(request,"payment/cancel.html",context)

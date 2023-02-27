@@ -151,20 +151,20 @@ def CustomerProfileView(request,username):
 def AddToCart(request,pk):
     # get the user profile
     user_profile = get_object_or_404(Customer, user=request.user)
-
     product = get_object_or_404(PartyTicket,id=pk)
+
     # create cart item of the selected product
     cart_item,status = CartItem.objects.get_or_create(product=product,cart__customer__user__username=user_profile,is_ordered=False)
+
     # check if the user already owns this product
-    print(cart_item.quantity)
     if status is False:
         messages.info(request,"You already own this product")
-        return redirect(request.META.get('HTTP_REFERER'))
 
-    cart = Cart.objects.get(customer__user__username = user_profile)
-    cart.items.add(cart_item)
-    
-    messages.info(request, "Item added to cart")
+    else:
+        cart = Cart.objects.get(customer__user__username = user_profile)
+        cart.items.add(cart_item)
+        messages.info(request, "Item added to cart")
+        
     return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='account:login')
