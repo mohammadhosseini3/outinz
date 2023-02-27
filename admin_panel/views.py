@@ -101,12 +101,12 @@ def DeleteUser(request,pk):
 @allowed_users(['admin'])
 def AddTicket(request):
     if request.method == 'POST':
-        provider_id = get_object_or_404(Store,username__username=request.POST['provider'])
+        provider_id = get_object_or_404(Store,username__username=str(request.POST['provider']).lower())
         lst = [request.POST['start-date'],request.POST['start-hour']]
         ticket,created = PartyTicket.objects.get_or_create(
             name =  request.POST['name'],
             provider = provider_id,
-            price = request.POST['price'],
+            price = request.POST['ticket-price'],
             start_date = ' '.join(lst),
             description = request.POST['description'],
             status= "selling"

@@ -63,10 +63,11 @@
                     </div>
                 </div>
                 <input type="submit" value="Add ticket" data-modalTarget="add-store-modal" class="addTicket-btn">
+                {% for message in messages %}
                 <ul class="err-wrapper">
-                    <li>provider username not found</li>
-                    <li>ticket date is invalid</li>
+                    {{message}}
                 </ul>
+                {% endfor %}
             </form>
         </div>
     </div>

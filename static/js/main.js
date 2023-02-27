@@ -95,7 +95,7 @@ window.onscroll = function() {
         } else {
             navbar.style.padding = '5px 40px'
         }
-        navbarImg.setAttribute('src' , 'images/ticket logo purple png.png')
+        navbarImg.setAttribute('src' , '/static/images/ticket logo purple png.png')
     } else {
         navbar.classList.remove('scrolling')
         if(window.innerWidth < 550 ){
@@ -103,7 +103,7 @@ window.onscroll = function() {
         } else {
             navbar.style.padding = '5px 40px'
         }
-        navbarImg.setAttribute('src' , 'images/ticket logo gray png.png')
+        navbarImg.setAttribute('src' , '/static/images/ticket logo gray png.png')
     }
 
     if(document.documentElement.scrollTop > 150){
