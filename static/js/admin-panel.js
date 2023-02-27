@@ -212,6 +212,7 @@ logoutCancelBtn.addEventListener('click',function(){
     logoutModal.classList.remove('active')
 })
 
+
 // search inputs
 
 searchInput.addEventListener('keyup',function(event){
@@ -224,4 +225,3 @@ searchInput.addEventListener('keyup',function(event){
         }
     })
 })
-

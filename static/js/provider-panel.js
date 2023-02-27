@@ -117,9 +117,14 @@ logoutCancelBtn.addEventListener('click',function(){
     logoutModal.classList.remove('active')
 })
 
+
 // show and hide Modal
 closeModalBtns.forEach(function(closeModalBtn){
     closeModalBtn.addEventListener('click',function(){
         closeModalBtn.parentNode.parentNode.parentNode.classList.remove('active')
     })
+})
+
+submitBtn.addEventListener('click',function(event){
+    event.preventDefault()
 })

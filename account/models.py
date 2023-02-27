@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.dispatch import receiver
+# from django.dispatch import receiver
 from django.db.models.signals import post_save
-from parties.models import PartyTicket
-from .extras import generate_order_id
+# from parties.models import PartyTicket
+# from .extras import generate_order_id
 # Create your models here.
 
 class Customer(models.Model):
@@ -11,6 +11,7 @@ class Customer(models.Model):
     fname = models.CharField(max_length=200,null=True,verbose_name="First name")
     lname = models.CharField(max_length=200,null=True,verbose_name="Last name")
     email = models.EmailField(max_length=200,null=True,unique=True)
+    forget_pass_token = models.CharField(max_length=100,blank=True,null=True)
 
     def is_member(self):
         return self.user.groups.filter(name='customer').exists()

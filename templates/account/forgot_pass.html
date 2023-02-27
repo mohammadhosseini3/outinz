@@ -1,23 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/forgotPass.css">
-    <link rel="icon" href="images/ticket logo purple png.png" type="image/icon type">
+    <link rel="stylesheet" href="{% static 'css/forgot_pass.css' %}">
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
     <title>Outinz form</title>
 </head>
 <body>
 
     <div class="container">
         <div class="title">
-            <a href="./login.html" class="back-to-home">Back To Login Form</a>
+            <a href="{% url 'account:login' %}" class="back-to-home">Back To Login Form</a>
             <h2>Outinz Change Password</h2>
             <p class="desc">Let's change your password</p>
         </div>
         <!-- log in form -->
-        <form action="" class="changePass-form">
+        <form action="" class="changePass-form" method="post">
+            {% csrf_token %}
             <div class="inputs-desc">
                 <ul>
                     <ul>
@@ -32,7 +34,7 @@
             <div class="form-inputs">
                 <div class="changePass-inputs-container">
                     <div class="input-container pass-input">
-                        <input type="password" class="password-input" required minlength="8" maxlength="16">
+                        <input type="password" name="new_password" class="password-input" required minlength="8" maxlength="16">
                         <span class="input-ph">password</span>
                         <div class="show-pass-icons">
                             <div class="show-pass-icon icon-wrapper">
@@ -44,7 +46,7 @@
                         </div>
                     </div>
                     <div class="input-container repeat-pass-input">
-                        <input type="password" class="password-input" required  minlength="8" maxlength="16">
+                        <input type="password" name="confirm_password" class="password-input" required  minlength="8" maxlength="16">
                         <span class="input-ph">repeat password</span>
                         <p>Passwords are not  same</p>
                         <div class="show-pass-icons">
@@ -56,12 +58,13 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="user_id" value="{{user_id}}">
                 </div>
                 <input type="submit" class="submit" value="Change Password">
             </div>    
         </form>
     </div>
 
-    <script src="js/forgotPass.js"></script>
+    <script src="{% static 'js/forgot_pass.js' %}"></script>
 </body>
 </html>

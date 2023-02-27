@@ -19,6 +19,8 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from .extras import generate_order_id
+import uuid
+from django.conf import settings
 # Create your views here.
 
 def activate(request, uidb64, token):
@@ -32,6 +34,23 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        customer,created = Customer.objects.get_or_create(
+                email=user.email,
+                user=user,
+                fname=user.first_name,
+                lname = user.last_name,
+        )
+        if created:
+            customer.save()
+
+            cart,is_created=customer.cart_set.get_or_create(customer=customer)
+            if is_created:
+                cart.ref_code = generate_order_id()
+                cart.customer = customer
+                cart.save()
+            #add user to customer group
+            group = Group.objects.get(name = 'customer')
+            user.groups.add(group)
 
         messages.success(request, 'Thank you for your email confirmation. Now you can login your account.')
     else:
@@ -49,9 +68,9 @@ def activateEmail(request, user, to_email):
     })
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f'Dear \'{user}\', please go to you email \'{to_email}\' inbox and click on \
-            received activation link to confirm and complete the registration. Note: Check your spam folder.')
+        messages.warning(request, 'Dear {{user}} please go to your E-mail {{user.email}} Inbox and click on received activation link to confirm and complete  the registration( Note : Check Your spam folder )')
     else:
+        user.delete()
         messages.error(request, f'Problem sending confirmation email to {to_email}, check if you typed it correctly.')
 
 @unauthenticate_user
@@ -73,30 +92,16 @@ def RegisterView(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+            email = form.cleaned_data.get('email')
+            
+            activateEmail(request,user,email)
 
-            customer,created = Customer.objects.get_or_create(
-                email=form.cleaned_data.get('email'),
-                user=user,
-                fname=form.cleaned_data.get('first_name'),
-                lname = form.cleaned_data.get('last_name'),
-            )
-            if created:
-                customer.save()
-
-                cart,is_created=customer.cart_set.get_or_create(customer=customer)
-                if is_created:
-                    cart.ref_code = generate_order_id()
-                    cart.customer = customer
-                    cart.save()
-                #add user to customer group
-                group = Group.objects.get(name = 'customer')
-                user.groups.add(group)
-
-                activateEmail(request,user,form.cleaned_data.get('email'))
-
+            messages.success(request,f'Dear {user} please go to your E-mail {email} Inbox and click on received activation link to confirm and complete  the registration( Note : Check Your spam folder )')
             return redirect('account:login')
+        
         else:
             messages.error(request,"An error has occured during registering.")
+
     context = {}
     return render(request,'account/register.html',context)
 
@@ -187,3 +192,51 @@ def DecreaseQuantity(request,pk):
     item = CartItem.objects.get(id=pk)
     item.decrease_quantity()
     return redirect(request.META.get('HTTP_REFERER'))
+
+def ForgotPassword(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+
+        if not User.objects.filter(username=username).first():
+            messages.warning(request,"Username doesn't exist.")
+
+        else:
+            email = get_object_or_404(User,username=username).email
+            token = str(uuid.uuid4())
+
+            customer = get_object_or_404(Customer,user__username=username)
+            customer.forget_pass_token=token
+            customer.save()
+
+            subject = "Forgotten Password Link"
+            message = f"Click on the link to change your password {request.scheme}://{request.META['HTTP_HOST']}/account/change-password/{token}/"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            l = EmailMessage(subject,message,email_from,recipient_list)
+            if l.send():
+                messages.warning(request, 'An email has been sent to your username email')
+            else:
+                messages.error(request, 'Email doesn\'t send successfully')
+
+        return redirect('.')
+    return render(request,'account/forgot_pass_username.html',context={})
+
+def ChangePassword(request,token):
+    profile_obj = get_object_or_404(Customer,forget_pass_token=token)
+
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        # confirm_password = request.POST.get('confirm_password')
+        user_id = request.POST.get('user_id')
+
+        if not user_id:
+            messages.error(request,'No user id found')
+            return redirect('.')
+        
+        else:
+            user_obj = get_object_or_404(User,id=user_id)
+            user_obj.set_password(new_password)
+            user_obj.save()
+            messages.success(request,'Password has been changed.')
+            return redirect('account:login')
+    return render(request,'account/forgot_pass.html',context={'user_id':profile_obj.user.id})

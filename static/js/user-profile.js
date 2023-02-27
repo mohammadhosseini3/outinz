@@ -81,6 +81,9 @@ closeModalBtns.forEach(function(closeModalBtn){
     })
 })
 
+submitBtn.addEventListener('click',function(event){
+    event.preventDefault()
+})
 
 function increaseTicketCount(event){
     let ticketContainer = event.target.parentNode

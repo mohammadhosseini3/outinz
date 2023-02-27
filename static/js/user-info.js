@@ -69,6 +69,10 @@ addTicketToUserBtn.addEventListener('click',function(event){
     }
 })
 
+closeEditModalBtn.addEventListener('click',function(){
+    editTicketModal.classList.remove('active')
+})
+
 // show and hide logout modal
 deleteUserBtn.addEventListener('click',function(){
     deleteUserModal.classList.add('active')
@@ -76,8 +80,4 @@ deleteUserBtn.addEventListener('click',function(){
 
 deleteUserCancelBtn.addEventListener('click',function(){
     deleteUserModal.classList.remove('active')
-})
-
-closeEditModalBtn.addEventListener('click',function(){
-    editTicketModal.classList.remove('active')
 })

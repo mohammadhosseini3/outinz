@@ -13,6 +13,9 @@ urlpatterns = [
     re_path(r'^add-to-cart/(?P<pk>[\w]+)/$',views.AddToCart,name = 'add-to-cart'),
     re_path(r'^remove-from-cart/(?P<pk>[\w]+)/$',views.RemoveFromCart,name = 'remove-from-cart'),
 
+    re_path(r'^forgot-password-username/$',views.ForgotPassword,name = 'forgot-pass-username'),
+    path('change-password/<token>/',views.ChangePassword,name = 'change-password'),
+
     re_path(r'^increase-quantity/(?P<pk>[\w]+)/$',views.IncreaseQuantity,name = 'increase-quantity'),
     re_path(r'^decrease-quantity/(?P<pk>[\w]+)/$',views.DecreaseQuantity,name = 'decrease-quantity'),
     

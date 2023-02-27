@@ -140,7 +140,7 @@
                             {% if item.is_ordered is True %}
                             <tr>
                                 <td>{{item.product.name}} Party</td>
-                                <td>{{item.product.venue}}</td>
+                                <td>{{item.product.provider.name}}</td>
                                 <td>{{item.product.start_date|date:'d/m/Y'}}</td>
                                 <td>{{item.product.start_date|date:'g:i a'}}</td>
                             </tr>

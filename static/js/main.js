@@ -54,12 +54,6 @@ function changeDetailsDependWidth(){
     if(document.documentElement.scrollTop > 530 && !isCounterSet){
         count()
     }
-
-    if(slideCount === 0){
-        sliderPrevBtn.disabled = true
-    } else if(cards.style.transform === 'translateX(1880px)'){
-        sliderNextBtn.disabled = true
-    }
     
     if(remainCards <= 3){
         sliderPrevBtn.disabled = true
@@ -89,7 +83,6 @@ function changeDetailsDependWidth(){
         }
         sliderPrevBtn.disabled = true
     }
-    slideCount = 0
     cards.style.transform = `translateX(${currentLoc}px)`
 }
 
@@ -102,7 +95,7 @@ window.onscroll = function() {
         } else {
             navbar.style.padding = '5px 40px'
         }
-        navbarImg.setAttribute('src' , 'static/images/ticket logo purple png.png')
+        navbarImg.setAttribute('src' , 'images/ticket logo purple png.png')
     } else {
         navbar.classList.remove('scrolling')
         if(window.innerWidth < 550 ){
@@ -110,7 +103,7 @@ window.onscroll = function() {
         } else {
             navbar.style.padding = '5px 40px'
         }
-        navbarImg.setAttribute('src' , 'static/images/ticket logo gray png.png')
+        navbarImg.setAttribute('src' , 'images/ticket logo gray png.png')
     }
 
     if(document.documentElement.scrollTop > 150){
@@ -266,31 +259,8 @@ formInputs.forEach(function(input){
     })
 })
 
-
-// sending email
-
-let emailInput = $.getElementById('Email-input')
-let nameInput = $.getElementById('name-input')
-let messageInput = $.getElementById('message-input')
-
-function sendEmail(){
-    if(nameInput.value !== ''&& emailInput.value!== '' && messageInput.value !== ''){
-        Email.send({
-            SecureToken :'e4c153e9-2328-4e7d-bd33-db4b3680bb9c',
-            To : 'e638fe6b03@boxmail.lol',
-            From : 'wonderguy2003@gmail.com',
-            Subject : "New Contact From Enquiry",
-            Body : "Name : " + nameInput.value + '<br><br> Email : '+ emailInput.value + '<br><br> Message : ' + messageInput.value
-        }).then(
-          message => alert(message)
-        );
-    }
-}
-
-
 // events
 window.addEventListener('load',changeDetailsDependWidth)
-window.addEventListener('resize',changeDetailsDependWidth)
 sliderNextBtn.addEventListener('click',nextCardHandler)
 sliderPrevBtn.addEventListener('click',prevCardHandler)
 goToUpBtn.addEventListener('click',goToUpHandler)
