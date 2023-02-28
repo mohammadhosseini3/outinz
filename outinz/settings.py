@@ -121,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
@@ -135,7 +135,7 @@ STRIPE_SECRET_KEY = "sk_test_51MO1P0EnUU07dXXGs14MvaP11kNashmQ0tNcCctO8VtPNeTDyS
 STRIPE_WEBHOOK_SECRET = "whsec_5a208cde0b6160e3f215e4e9a1e98cacb802628a82770d48e5f19349581f6692"
 
 CONTACT_EMAIL = 'contact@example.com'
-ADMIN_EMAILS = ['outinz.outinz@gmail.com', ]
+ADMIN_EMAILS = ['outinz.outinz@gmail.com',]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

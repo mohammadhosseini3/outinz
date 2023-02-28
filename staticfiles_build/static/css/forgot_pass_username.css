@@ -1,0 +1,280 @@
+@import './fonts.css';
+
+
+*{
+    margin:0;
+    padding:0;
+    -webkit-box-sizing:border-box;
+            box-sizing:border-box;
+}
+
+body{
+    height:120vh;
+    display:-ms-grid;
+    display:grid;
+    place-content: center;
+    background:-webkit-gradient(linear , left top, right top , from(#8051ef) , to(#4800ef));
+    background:-o-linear-gradient(left , #8051ef , #4800ef);
+    background:linear-gradient(90deg , #8051ef , #4800ef)
+}
+
+.container{
+    background:#fff;
+    border-radius:10px;
+    width:850px;
+    overflow:hidden;
+    padding:30px 30px;
+    height:-webkit-fit-content;
+    height:-moz-fit-content;
+    height:fit-content;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+    -webkit-box-pack:start;
+        -ms-flex-pack:start;
+            justify-content:flex-start;
+}
+
+.container .back-to-home{
+    padding:8px 12px;
+    width:-webkit-fit-content;
+    width:-moz-fit-content;
+    width:fit-content;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    border-radius: 8px;
+    text-decoration:none;
+    color:#fff;
+    background:-o-linear-gradient(45deg , #4700b1 , #7f2aff);
+    background:linear-gradient(45deg , #4700b1 , #7f2aff);
+    font-family:'Fredoka One', cursive;
+    -webkit-transition:0.1s linear;
+    -o-transition:0.1s linear;
+    transition:0.1s linear;
+}
+
+.container .title {
+    height:75px;
+    margin-bottom:15px;
+    padding:0 5px;
+}
+
+.container .title h2{
+    color:#6210de;
+    font-size:1.5rem;
+    margin-top:10px;
+    font-family: 'Pacifico', cursive;
+}
+
+.container .title p.desc{
+    color:#6210de8e;
+    margin-top:5px;
+    font-size:1.2rem;
+    font-family: 'Archivo', sans-serif;
+} 
+
+.container .changePass-form{
+    margin-top:20px;
+}
+
+.container .changePass-form .form-title h4{
+    font-family: 'Archivo', sans-serif;
+    color:#747474;
+    font-size:1rem;
+    margin-top:10px;
+}
+
+.changePass-form .inputs-desc{
+    margin:10px;
+    width:100%;
+    margin:0 auto;
+    background:#888;
+    padding:5px;
+    border-radius:6px;
+}
+
+.changePass-form .inputs-desc ul{
+    padding:5px 15px;
+} 
+
+.changePass-form .inputs-desc li::marker{
+    content:'*  ';
+    color:#c80c1b;
+}
+
+.changePass-form .inputs-desc li{
+    color:#fff;
+    font-family: 'Archivo', sans-serif;
+    margin-top:10px;
+}
+
+.container .changePass-form .changePass-inputs-container input{
+    border:1.5px solid #9a9a9a;
+    outline:none;
+    caret-color: #4700b1;
+    color:#6210de;
+    font-size:1.25rem;
+    letter-spacing:1px;
+    padding:5px;
+    -webkit-transition:0.15s ease-out;
+    -o-transition:0.15s ease-out;
+    transition:0.15s ease-out; 
+    width:100%;
+}
+
+.container .changePass-form .input-container input:focus ~ span.input-ph,
+.container .changePass-form .input-container input:valid ~ span.input-ph{
+    color:#6210de;
+}
+
+.container .changePass-form .input-container input:focus,
+.container .changePass-form .input-container input:valid{
+    border-color:#6210de;
+}
+
+.container .changePass-form .input-container span.input-ph{
+    position:absolute;
+    left:10px;
+    top:-10px;
+    background:#fff;
+    font-weight:500;
+    padding: 0 10px;
+    font-family: 'Archivo', sans-serif;
+    pointer-events: none;
+    font-size:0.9rem;
+    color:#9a9a9a;
+    text-transform:capitalize;
+    -webkit-transition:0.15s ease-out;
+    -o-transition:0.15s ease-out;
+    transition:0.15s ease-out; 
+}
+
+.container .changePass-form .input-container{
+    position:relative;
+    height:-webkit-fit-content;
+    height:-moz-fit-content;
+    height:fit-content;
+    width:100%;
+}
+
+.container .changePass-form .form-inputs .submit{
+    padding:15px 40px;
+    width:-webkit-fit-content;
+    width:-moz-fit-content;
+    width:fit-content;
+    border:none;
+    margin:20px auto;
+    cursor:pointer;
+    border-radius:25px;
+    color:#fff;
+    background:-o-linear-gradient(45deg , #4700b1 , #7f2aff);
+    background:linear-gradient(45deg , #4700b1 , #7f2aff);
+    font-family:'Fredoka One', cursive;
+    -webkit-transition:0.1s linear;
+    -o-transition:0.1s linear;
+    transition:0.1s linear;
+}
+
+.container .changePass-form .form-inputs .submit:hover{
+    -webkit-transform:scale(1.05);
+        -ms-transform:scale(1.05);
+            transform:scale(1.05);
+}
+
+
+.changePass-form .form-inputs{
+    margin-top:40px;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+    -webkit-box-pack:center;
+        -ms-flex-pack:center;
+            justify-content:center;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+}
+
+.form-inputs .changePass-inputs-container{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+    -webkit-box-pack:justify;
+        -ms-flex-pack:justify;
+            justify-content:space-between;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+    gap:40px;
+    height:-webkit-fit-content;
+    height:-moz-fit-content;
+    height:fit-content;
+    width:80%;
+    margin:0 auto;
+}
+
+.form-inputs .changePass-inputs-container .input-container{
+    width:100%;
+}
+
+/* errors */
+.err-wrapper{
+    color:rgb(255, 36, 36);
+    list-style: none;
+    text-align:center;
+    display:flex;
+    justify-content: center;
+    gap:10px;
+    margin-top:10px;
+    font-family:'Fredoka One', cursive;
+}
+
+/* media  queries*/
+@media (max-width : 900px){
+    .container{
+        width:650px;
+    }
+}
+
+@media (max-width : 720px){
+    .container{
+        width:450px;
+    }
+
+    .err-wrapper{
+        flex-direction:column;
+    }
+}
+
+@media (max-width : 510px){
+    .container{
+        width:400px;
+    }
+
+    .err-wrapper{
+        flex-direction:column;
+    }
+}
+
+@media (max-width : 400px){
+    .container{
+        width:350px;
+    }
+
+    .err-wrapper{
+        flex-direction:column;
+    }
+}
