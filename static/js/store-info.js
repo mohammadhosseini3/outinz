@@ -13,12 +13,6 @@ let deleteStoreModal = $.querySelector('.delete-modal')
 let deleteStoreCancelBtn = $.querySelector('.delete-modal .cancel-btn')
 let formTarget , passTarget
 
-window.addEventListener('load',function(){
-    signUpInputElems.forEach(function(signUpInputElem){
-        signUpInputElem.value = ''
-    })
-})
-
 function clearSpace(event){
     event.target.value = event.target.value.trim()
 }

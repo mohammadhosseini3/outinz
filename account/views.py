@@ -75,6 +75,7 @@ def activateEmail(request, user, to_email):
 
 @unauthenticate_user
 def RegisterView(request):
+    
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         # Check email and username in db
@@ -108,7 +109,7 @@ def RegisterView(request):
 @unauthenticate_user
 def LoginView(request):
     if request.method == "POST":
-        username = request.POST.get('username')
+        username = str(request.POST.get('username')).lower()
         password = request.POST.get('password')
         
         user = authenticate(request,username=username,password=password)

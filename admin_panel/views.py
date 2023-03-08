@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import AddStoreForm,AddTicketForm
+from .forms import AddStoreForm,EditUserForm,EditTicketForm
 from django.contrib.auth.models import User,Group
 from .models import CartItem
 from account.models import Customer
@@ -15,9 +15,12 @@ def AddStore(request):
     form = AddStoreForm()
     if request.method == 'POST':
         form = AddStoreForm(request.POST)
-        email = User.objects.filter(email=request.POST.get('email'))
+        email = User.objects.filter(email=request.POST.get('email')).first()
+        check_user = User.objects.filter(username=request.POST.get('username')).first()
         if email:
             messages.error(request,"The email is already in use.")
+        if check_user:
+            messages.error(request,"The username is already in use.")
         elif form.is_valid():
             
             #create store model
@@ -60,11 +63,23 @@ def AdminPanelView(request,username):
 @login_required(login_url="/account/login/")
 @allowed_users(['admin'])
 def UserInfo(request,pk):
+    customer = get_object_or_404(User,customer__id=pk)
+    form = EditUserForm(instance=customer)
+    if request.method == 'POST':
+        form = EditUserForm(request.POST,instance=customer)
+        if form.is_valid():
+            form.save()
+
+    ticket_id = request.GET.get('ticket-id')
+            
     customer = get_object_or_404(Customer,id=pk)
     products = customer.cart_set.all()[0].items.filter(is_ordered=True).order_by('-created_date')
+
     context={
         'customer':customer,
         'products':products,
+        'form':form,
+        'ticket_id':ticket_id
     }
     return render(request,'admin/user-info.html',context)
 
@@ -78,6 +93,19 @@ def StoreInfo(request,pk):
         'tickets':tickets
     }
     return render(request,'admin/store-info.html',context)
+
+@login_required(login_url="/account/login/")
+@allowed_users(['admin'])
+def TicketInfo(request,pk):
+    ticket = get_object_or_404(PartyTicket,id=pk)
+    form = EditTicketForm(instance = ticket)
+    purchased_tickets = CartItem.objects.filter(product__id=pk,is_ordered=True).order_by('-created_date')
+    context={
+        'ticket':ticket,
+        'purchased_tickets':purchased_tickets,
+        'form':form
+    }
+    return render(request,'admin/ticket-info.html',context)
 
 @login_required(login_url="/account/login/")
 @allowed_users(['admin'])

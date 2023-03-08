@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
+from account.models import Customer
 from django import forms
 from parties.models import PartyTicket
 from django.contrib.auth.models import User
@@ -11,8 +11,17 @@ class AddStoreForm(UserCreationForm):
         model = User
         fields = ['username','password1','password2','store_name','venue','email']
 
-class AddTicketForm(ModelForm):
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name','last_name','email']
+
+# class EditCustomerForm(forms.ModelForm):
+#     class Meta:
+#         model = Customer
+#         fields = ['fname','lname','email']
+
+class EditTicketForm(forms.ModelForm):
     class Meta:
         model = PartyTicket
         fields = '__all__'
-        exclude = ['status']

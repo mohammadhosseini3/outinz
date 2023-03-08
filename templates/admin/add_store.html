@@ -79,15 +79,12 @@
                     </div>
                 </div>
                 <input type="submit" value="Add Provider" data-modalTarget="add-ticket-modal" class="addStore-btn">
+                <ul class="err-wrapper">
+                {% for message in messages %}
+                <li>{{message}}</li>
+                {% endfor %}
+                </ul>
             </form>
-            <div class="modal">
-                <div class="success">
-                    <p>Provider Added</p>
-                </div>
-            </div>
-            {% for message in messages %}
-            {{message}}
-            {% endfor %}
         </div>
     </div>
     

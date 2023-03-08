@@ -13,6 +13,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=200,null=True,unique=True)
     forget_pass_token = models.CharField(max_length=100,blank=True,null=True)
 
+
     def is_member(self):
         return self.user.groups.filter(name='customer').exists()
 

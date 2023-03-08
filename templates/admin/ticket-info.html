@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="{% static 'css/ticket-info.css' %}">
+    <link rel="icon" href="{% static 'images/ticket logo purple png.png' %}" type="image/icon type">
+    <title>Outinz ticket info</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sections">
+            <span><a href="/">Home</a> / <a href="{% url 'admin-admin:admin-panel' user %}">Admin Panel</a> / <a href=".">ticketProfile</a> </span>
+        </div>
+
+        <div class="content">
+            <!-- ticket profile section -->
+            <div class="ticketProfile">
+              <div class="profile">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm130.7 57.9c-4.2-13.6 7.1-25.9 21.3-25.9H364.5c14.2 0 25.5 12.4 21.3 25.9C369 368.4 318.2 408 258.2 408s-110.8-39.6-127.5-94.1zM144.4 192a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+              </div>
+              <div class="profile-desc">
+                <h4 class="username">@{{ticket.provider}}</h4>
+                <h2 class="fullname">{{ticket.name}} Party</h2>
+                <div class="desc">{{ticket.description}}</div>
+              </div>
+              <div class="btns">
+                <button class="edit-ticket">Edit ticket</button>
+              </div>
+            </div>
+            <!-- ticket information section -->
+            <div class="ticket-info">
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Id</h3>
+                    <p class="ticketInfo">{{ticket.id}}</p>
+                </div>
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Type</h3>
+                    <p class="ticketInfo">Party</p>
+                </div>
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Status</h3>
+                    <p class="ticketInfo">{{ticket.get_status_display}}</p>
+                </div>
+                <div class=" ticket-information">
+                    <h3 class="info-title">Provider User Name</h3>
+                    <p class="ticketInfo">{{ticket.provider}}</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Provider Venue</h3>
+                    <p class="ticketInfo">{{ticket.provider.address}}</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Provider Email</h3>
+                    <p class="ticketInfo">{{ticket.provider.email}}</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Capacity</h3>
+                    <p class="ticketInfo">--</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket remaining</h3>
+                    <p class="ticketInfo">--</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket start date</h3>
+                    <p class="ticketInfo">{{ticket.start_date|date:'d/m/Y'}}</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket start hour</h3>
+                    <p class="ticketInfo">{{ticket.start_date|date:'H:i'}}</p>
+                </div> 
+                <div class=" ticket-information">
+                    <h3 class="info-title">Ticket Price</h3>
+                    <p class="ticketInfo">{{ticket.price}} ₺</p>
+                </div> 
+            </div>
+            <!-- ticket purchased tickets -->
+            <div class="purchased-tickets-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Buyer UserName</th>
+                            <th>Number of tickets purchased</th>
+                            <th>Provider UserName</th>
+                            <th>Provider Venue</th>
+                            <th>Purchase Date</th>
+                            <th>The cost has been taken</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in purchased_tickets %}
+                        <tr>
+                            <td>{{ticket.id}}</td>
+                            <td>{{ticket.cart_set.all.0.customer}}</td>
+                            <td>{{ticket.quantity}}</td>
+                            <td>{{ticket.product.provider}}</td>
+                            <td>{{ticket.product.provider.address}}</td>
+                            <td>{{ticket.created_date|date:'d/m/Y'}}</td>
+                            <td>{{ticket.total_price}} ₺</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="edit-ticket-form" style="display:none;">
+        <div class="backInfo-Btn">
+            <button class="back-to-infos">Back To Informations</button>
+        </div>
+        <!-- edit form -->
+        <div class="add-content">
+            <form action="" class="add-ticket" method="post">
+                {% csrf_token %}
+                <!-- {{form}} -->
+                <h2>Change Ticket Information</h2>
+                <div class="inputs">
+                    <div class="input input-category">
+                        <span class="input-title">Ticket Category</span>
+                        <select name="Ticket category">
+                            <option value="party">party</option>
+                            <option value="concert">concert</option>
+                        </select>
+                    </div>
+                    <div class="input input-category">
+                        <span class="input-title">Ticket Status</span>
+                        <select name="Ticket category">
+                            <option value="Selling">Selling</option>
+                            <option value="Canceled">Canceled</option>
+                            <option value="Deleted">Deleted</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Price</span>
+                        <input type="number" name="ticket-price" class="ticket-price" min="1">
+                        <p></p>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket's Provider UserName</span>
+                        <input type="text" name="ticket-Provider-username" class="ticket-input" >
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Start Date</span>
+                        <input type="date" name="ticket-start-date" class="ticket-input">
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Start Hour</span>
+                        <input type="time" name="ticket-start-date" class="ticket-input">
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Capacity</span>
+                        <input type="number" name="ticket-capacity ticket-input" class="ticket-capacity" min="0" > 
+                        <p></p>
+                    </div>
+                    <div class="input">
+                        <span class="input-title" >Ticket Description</span>
+                        <textarea name="ticket-description" class="ticket-desc" rows="10"></textarea> 
+                    </div>
+                </div>
+                <input type="submit" value="Add ticket" data-modalTarget="add-store-modal" class="addTicket-btn">
+                <ul class="err-wrapper">
+                    <li>provider username not found</li>
+                    <li>ticket date is invalid</li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/ticket-info.js' %}"></script>
+</body>
+</html>

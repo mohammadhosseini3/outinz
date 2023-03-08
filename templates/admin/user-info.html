@@ -40,11 +40,11 @@
                 </div>
                 <div class=" user-information">
                     <h3 class="info-title">User first Name</h3>
-                    <p class="userInfo">{{customer.fname}}</p>
+                    <p class="userInfo">{{customer.user.first_name}}</p>
                 </div> 
                 <div class=" user-information">
                     <h3 class="info-title">User last Name</h3>
-                    <p class="userInfo">{{customer.lname}}</p>
+                    <p class="userInfo">{{customer.user.last_name}}</p>
                 </div> 
                 <div class=" user-information">
                     <h3 class="info-title">User Name</h3>
@@ -52,7 +52,7 @@
                 </div> 
                 <div class=" user-information">
                     <h3 class="info-title">User Email</h3>
-                    <p class="userInfo">{{customer.email}}</p>
+                    <p class="userInfo">{{customer.user.email}}</p>
                 </div> 
                 <div class=" user-information">
                     <h3 class="info-title">User Type</h3>
@@ -93,7 +93,8 @@
     <div class="edit-user-form" style="display:none;">
         <button class="back-to-infos">Back To Informations</button>
         <!-- edit form -->
-        <form action="" class="signUp-form" >
+        <form action="" class="signUp-form" method="post" >
+            {% csrf_token %}
             <div class="inputs-desc">
                 <ul>
                     <li>Please enter your details carefully so you don't run into problems later</li>
@@ -105,33 +106,29 @@
                 <h4>Enter your details below</h4>
             </div>
             <div class="form-inputs">
+                
                 <div class="singup-inputs-container">
+                    
                     <div class="input-container">
-                        <input type="text" class="name-input" maxlength="16">
+                        {{form.first_name}}
                         <span class="input-ph">first name</span>
                     </div>
                     <div class="input-container">
-                        <input type="text" class="family-input" maxlength="16">
+                        {{form.last_name}}
                         <span class="input-ph">last name</span>
                     </div>
                     <div class="input-container">
-                        <input type="text" class="email-input">
+                        {{form.email}}
                         <span class="input-ph">Email</span>         
                         <p>The email is invalid</p>
                     </div>
-                    <div class="input-container userType-input-container">
-                        <span class="input-ph">UserType</span>         
-                        <select name="user type">
-                            <option value="Customer" selected>Customer</option>
-                            <option value="Provider">Provider</option>
-                            <option value="Admin">Admin</option>
-                        </select>
-                    </div>
                 </div>
                 <input type="submit" class="submit" value="Edit User">
+                {% for message in messages %}
                 <ul class="err-wrapper">
-                    <li>Email is invalid</li>
+                    <li>{{message}}/li>
                 </ul>
+                {% endfor %}
             </div>    
         </form>
     </div>
@@ -141,22 +138,20 @@
         </div>
         <!-- edit form -->
         <div class="add-content">
-            <form action="" class="add-ticket">
+            <form action="" class="add-ticket" method="get">
                 <h2>Add Ticket To User</h2>
                 <div class="inputs">
                     <div class="input">
-                        <span class="input-title" >Ticket's Provider Id</span>
-                        <input type="text" name="ticket-start-date" class="ticket-input">
+                        <span class="input-title" >Ticket's Id</span>
+                        <input type="text" name="ticket-id" class="ticket-input">
                         <p style="display:none">Id is Invalid</p>
                     </div>
                 </div>
-                <input type="submit" value="Add ticket" class="addTicket-btn">
-                <ul class="err-wrapper">
-                    <li>Provider id not found</li>
-                </ul>
+                <input type="submit" value="Add ticket">
             </form>
         </div>
-        <div class="modal-add-ticket-details active">
+        {% if ticket_id %}
+        <div class="modal-add-ticket-details">
             <div class="ticket-info-tips">
                 Make sure that the ticket information is as follows. If not, click Cancel. After accepting the ticket, it will be added to the user's purchased tickets
             </div>
@@ -211,6 +206,7 @@
                 <button id="accept-btn" type="button">accept</button>
             </div>
         </div>
+        {% endif %}
     </div>
 
     <div class="delete-modal">
@@ -223,8 +219,6 @@
             <button onclick="window.location.href='/panel/delete-user/{{customer.id}}'" type="button" class="delete-btn">Delete</button>
         </div>
     </div>
-
-
     <script src="{% static 'js/user-info.js' %}"></script>
 </body>
 </html>

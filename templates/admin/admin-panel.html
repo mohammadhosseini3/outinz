@@ -154,7 +154,7 @@
                                 {% for ticket in purchased_tickets %}
                                 <tr>
                                     <td>{{ticket.cart_set.filter.0.customer}}</td>
-                                    <td>Party</td>
+                                    <td>{{ticket.product.name}} Party</td>
                                     <td>{{ticket.product.provider.name}}</td>
                                     <td>{{ticket.created_date|date:'d/m/Y'}}</td>
                                 </tr>
@@ -278,7 +278,7 @@
                             {% for ticket in tickets %}
                             <tr>
                                 <td>
-                                    <a href="{% url 'party:party-ticket-detail' ticket.id %}">{{ticket.id}}</a>
+                                    <a href="{% url 'admin-admin:ticket-info' ticket.id %}">{{ticket.id}}</a>
                                 </td>
                                 <td class="username">{{ticket.provider}}</td>
                                 <td>{{ticket.name}} Party</td>

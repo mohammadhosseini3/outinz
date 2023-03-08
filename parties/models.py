@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 
 class PartyVenue(models.Model):
@@ -31,6 +32,12 @@ class PartyTicket(models.Model):
         ('selling','Selling'),
     ]
     status = models.CharField(max_length=10,choices=TICKET_STATUS,default='Selling')
+    
+    def is_expired(self):
+        if self.start_date <= timezone.now():
+            self.status = 'expired'
+            self.save()
+            return True
 
     def __str__(self):
         return f"{self.name}-{self.provider.name}-{self.price}-{self.status}"

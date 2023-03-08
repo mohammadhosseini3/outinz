@@ -1,6 +1,5 @@
 @import './fonts.css';
 
-
 *{
     margin:0;
     padding:0;
@@ -10,8 +9,9 @@
 
 body{
     height:100vh;
-    background:#d7d7d7;
+    background:#fff;
 }
+
 
 .container {
     display:-webkit-box;
@@ -44,6 +44,7 @@ body{
     -o-transition:color 0.15s ease-out;
     transition:color 0.15s ease-out;
 }
+
 .container .sections a:last-child{
     color:rgb(139, 139, 139);
 }
@@ -306,8 +307,8 @@ body{
     -ms-grid-column:23;
 }
 
-/* user profile section */
-.container .content .userProfile{
+/* ticket profile section */
+.container .content .ticketProfile{
     -ms-grid-column:1;
     -ms-grid-column-span:3;
     grid-column:1/4;
@@ -316,7 +317,7 @@ body{
     grid-row:1/3;
     background:#371B58;
     border-radius:22px;
-    padding:10px 0;
+    padding:20px 5px;
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
@@ -334,7 +335,7 @@ body{
     text-align:center;
 }
 
-.container .content .userProfile .profile{
+.container .content .ticketProfile .profile{
     background:#E9D5CA;
     width:100px;
     height:100px;
@@ -354,26 +355,39 @@ body{
             align-items:center;
 }
 
-.container .content .userProfile .profile svg{
+.container .content .ticketProfile .profile svg{
     fill:#371B58;
     width:4rem;
     height:4rem;
 }
 
-.container .content .userProfile .profile-desc .username{
+.container .content .ticketProfile .profile-desc{
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+.container .content .ticketProfile .profile-desc .username{
     color:#827397;
     font-family: 'Rouge Script', cursive;
     font-size:1.5rem;
 }
 
-.container .content .userProfile .profile-desc .fullname{
+.container .content .ticketProfile .profile-desc .fullname{
     color:#E9D5CA;
     margin-top:5px;
     font-family: 'Merienda', cursive;
-    
 }
 
-.container .content .userProfile .btns{
+.container .content .ticketProfile .profile-desc .desc{
+    color:#bcbcbc;
+    margin-top:5px;
+    font-family: 'Merienda', cursive;
+    font-size:0.75rem;
+}
+
+.container .content .ticketProfile .btns{
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
@@ -386,28 +400,17 @@ body{
     gap:10px;
 }
 
-.container .content .userProfile .btns button{
+.container .content .ticketProfile .btns button{
     font-family: 'Merienda', cursive;
-    padding:7.5px 15px;
+    padding:10px 20px;
     border:none;
     outline:none;
     border-radius:12px;
     cursor:pointer;
 }
 
-.container .content .userProfile .btns .delete-user{
-    background:#E9D5CA;
-    color:#371B58;
-    -webkit-transition:0.1s ease-out;
-    -o-transition:0.1s ease-out;
-    transition:0.1s ease-out;
-}
 
-.container .content .userProfile .btns .delete-user:hover{
-    background:#ffd3bd;
-}
-
-.container .content .userProfile .btns .edit-user{
+.container .content .ticketProfile .btns .edit-ticket{
     background:#4C3575;
     color:#E9D5CA;
     -webkit-transition:0.1s ease-out;
@@ -415,12 +418,12 @@ body{
     transition:0.1s ease-out;
 }
 
-.container .content .userProfile .btns .edit-user:hover{
+.container .content .ticketProfile .btns .edit-ticket:hover{
     background:#7454ac;
 }
 
-/* user info section */
-.container .content .user-info{
+/* ticket info section */
+.container .content .ticket-info{
     grid-column:4/-1;
     -ms-grid-row:1;
     -ms-grid-row-span:2;
@@ -443,7 +446,7 @@ body{
     padding:10px 20px;
     gap:10px;
 }
-.container .content .user-info .user-information{
+.container .content .ticket-info .ticket-information{
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
@@ -456,25 +459,28 @@ body{
     padding:5px;
     width:100%;
     pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
 }
 
-
-.container .content .user-info .user-information:not(.container .content .user-info .user-information:last-child){
+.container .content .ticket-info .ticket-information:not(.container .content .ticket-info .ticket-information:last-child){
     border-bottom:1px solid #371b58a6;
 }
 
-.container .content .user-info .user-information .info-title{
+.container .content .ticket-info .ticket-information .info-title{
     color:#2E0249;
     font-family: 'Merienda', cursive;
 }
 
-.container .content .user-info .user-information .userInfo{
+.container .content .ticket-info .ticket-information .ticketInfo{
     color:#1e0052c5;
     font-family: 'Gabriela', serif;
     width:50%;
 }
 
-/* user purchased tickets section */
+/* ticket purchased tickets section */
 
 .content .purchased-tickets-table{
     width:100%;
@@ -498,8 +504,8 @@ body{
     color:#ffe0d0;
     font-family: 'Gabriela', serif;
     font-size:1.25rem;
+    padding:2.5px 5px;
     font-size:1rem;
-    padding:4px 10px;
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -513,7 +519,7 @@ body{
 
 .content .purchased-tickets-table table tbody td{
     color:#4c3575;
-    padding:4px 10;
+    padding:2.5px 5px;
     font-size:1rem;
     font-family: 'Gabriela', serif;
     -webkit-transition:0.15s ease-out;
@@ -522,300 +528,16 @@ body{
 }
 
 .content .purchased-tickets-table table tbody tr:hover{
-    background:#ffceb5;
+    background:#cfa590;
 }
 
 .content .purchased-tickets-table table tbody tr:nth-child(even){
     background:#dc9f80;
 }
 
-.profile-content .add-admin{
-    grid-column:1/-1;
-    grid-row:3/-1;
-    background:#fff;
-    border-radius:10px;
-    padding:10px 15px;
-    text-align:center;
-}
+/* edit ticket section  */
 
-.edit-user-form{    
-    background:#fff;
-    border-radius:10px;
-    width:850px;
-    overflow:hidden;
-    padding:30px 30px;
-    height:-webkit-fit-content;
-    height:-moz-fit-content;
-    height:fit-content;
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-orient:vertical;
-    -webkit-box-direction:normal;
-        -ms-flex-direction:column;
-            flex-direction:column;
-    -webkit-box-pack:start;
-        -ms-flex-pack:start;
-            justify-content:flex-start;
-    position:absolute;
-    top:50%;
-    left:50%;
-    -webkit-transform:translate(-50% , -50%);
-        -ms-transform:translate(-50% , -50%);
-            transform:translate(-50% , -50%);
-}
-
-.edit-user-form .title {
-    height:75px;
-    margin-bottom:15px;
-    padding:0 5px;
-}
-
-.edit-user-form .title h2{
-    color:#6210de;
-    font-size:1.5rem;
-    font-family: 'Pacifico', cursive;
-}
-
-.edit-user-form .title p.desc{
-    color:#6210de8e;
-    margin-top:10px;
-    font-size:1.2rem;
-    font-family: 'Archivo', sans-serif;
-} 
-
-.edit-user-form .signUp-form{
-    margin-top:20px;
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-orient:vertical;
-    -webkit-box-direction:normal;
-        -ms-flex-direction:column;
-            flex-direction:column;
-    -webkit-box-pack:start;
-        -ms-flex-pack:start;
-            justify-content:flex-start;
-}
-.edit-user-form .signUp-form .form-title h4{
-    font-family: 'Archivo', sans-serif;
-    color:#747474;
-    font-size:1rem;
-    margin-top:10px;
-}
-
-.edit-user-form .signUp-form .form-inputs{
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-orient:vertical;
-    -webkit-box-direction:normal;
-        -ms-flex-direction:column;
-            flex-direction:column;
-    -webkit-box-pack:start;
-        -ms-flex-pack:start;
-            justify-content:flex-start;
-    gap:15px;
-}
-
-.edit-user-form .signUp-form .singup-inputs-container{
-    margin-top:30px;
-    display:-ms-grid;
-    display:grid;
-    -ms-grid-columns : 1fr 25px 1fr;
-    grid-template-columns : repeat(2,1fr);
-    gap:25px;
-}
-
-.edit-user-form .signUp-form .singup-inputs-container input{
-    border:1.5px solid #9a9a9a;
-    outline:none;
-    caret-color: #9a9a9a;
-    color:#9a9a9a;
-    font-size:1.25rem;
-    letter-spacing:1px;
-    padding:5px;
-    -webkit-transition:0.15s ease-out;
-    -o-transition:0.15s ease-out;
-    transition:0.15s ease-out; 
-    width:100%;
-}
-
-.edit-user-form .signUp-form .input-container.invalid input{
-    caret-color: #c80c1b !important;
-    color:#ff293b !important;
-    border:1.5px solid #ff293b !important;
-}
-
-.edit-user-form .signUp-form .input-container.invalid span.input-ph{
-    color:#ff293b !important;
-}
-
-.edit-user-form .signUp-form .input-container input:focus ~ span.input-ph{
-    color:#6210de;
-}
-
-.edit-user-form .signUp-form .input-container p{
-    display:none;
-    color:#ff293b;
-    margin-top:5px;
-}
-
-.edit-user-form .signUp-form .input-container.invalid p{
-    display:block;
-}
-
-.edit-user-form .signUp-form .input-container input:focus{
-    border-color:#6210de;
-    caret-color: #6210de;
-    color:#6210de;
-}
-.edit-user-form .signUp-form .input-container span.input-ph{
-    position:absolute;
-    left:10px;
-    top:-10px;
-    background:#fff;
-    font-weight:500;
-    padding: 0 10px;
-    font-family: 'Archivo', sans-serif;
-    pointer-events: none;
-    font-size:0.9rem;
-    color:#9a9a9a;
-    text-transform:capitalize;
-    -webkit-transition:0.15s ease-out;
-    -o-transition:0.15s ease-out;
-    transition:0.15s ease-out; 
-}
-
-.edit-user-form .signUp-form .input-container input.invalid{
-    border-color:#c80c1b;
-    color:#ff6e7a;
-    caret-color: #ff6f7b;
-}
-
-
-.edit-user-form .signUp-form .input-container{
-    position:relative;
-    height:-webkit-fit-content;
-    height:-moz-fit-content;
-    height:fit-content;
-}
-
-.signUp-form .input-container .show-pass{
-    position:absolute;
-    right:5px;
-    top:5px;
-    cursor:pointer;
-}
-.signUp-form .input-container .show-pass i{
-    color:#9a9a9a;
-    display:inline-block;
-    pointer-events: none;
-    font-size:1.25rem;
-}
-
-.signUp-form .input-container input:focus ~ .show-pass i{
-    color:#6600ff;
-}
-
-.signUp-form .inputs-desc{
-    margin:10px;
-    width:100%;
-    margin:0 auto;
-    background:#888;
-    padding:5px;
-    border-radius:6px;
-}
-
-.signUp-form .inputs-desc ul{
-    padding:5px 15px;
-} 
-
-.signUp-form .inputs-desc li::marker{
-    content:'*  ';
-    color:#c80c1b;
-}
-
-.signUp-form .inputs-desc li{
-    color:#fff;
-    font-family: 'Archivo', sans-serif;
-    margin-top:10px;
-}
-
-.edit-user-form .signUp-form .input-container select{
-    width:100%;
-    padding:12px 24px;
-    border-radius:5px;
-    background:#fff;
-    color: #6210de;
-    border:1px solid #6210de;
-    cursor:pointer;
-    margin-bottom:12px;
-}
-
-.edit-user-form .signUp-form .input-container.userType-input-container span{
-    color: #6210de !important;
-}
-
-.edit-user-form .signUp-form .input-container input.invalid ~ span.input-ph{
-    color:#c80c1b;
-}
-
-.edit-user-form .signUp-form .input-container input.invalid ~ .show-pass .material-symbols-outlined{
-    color:#c80c1b;
-}
-
-.edit-user-form .signUp-form .form-inputs .submit{
-    padding:15px 40px;
-    width:-webkit-fit-content;
-    width:-moz-fit-content;
-    width:fit-content;
-    border:none;
-    margin:0 auto;
-    cursor:pointer;
-    border-radius:25px;
-    color:#fff;
-    background:-o-linear-gradient(45deg , #4700b1 , #7f2aff);
-    background:linear-gradient(45deg , #4700b1 , #7f2aff);
-    font-family:'Fredoka One', cursive;
-    -webkit-transition:0.1s linear;
-    -o-transition:0.1s linear;
-    transition:0.1s linear;
-}
-
-.edit-user-form .signUp-form .form-inputs .submit:hover,
-.back-to-infos:hover{
-    -webkit-transform:scale(1.05);
-        -ms-transform:scale(1.05);
-            transform:scale(1.05);
-}
-
-.edit-user-form .signUp-form .input-container:nth-child(3){
-    grid-column: 1/-1;
-}
-
-.edit-user-form .signUp-form .input-container:last-child{
-    grid-column: 1/-1;
-}
-
-.back-to-infos{
-    background:-o-linear-gradient(45deg , #4700b1 , #7f2aff);
-    background:linear-gradient(45deg , #4700b1 , #7f2aff);
-    color:#fff;
-    padding:8px 12px;
-    border-radius:12px;
-    border:none;
-    outline:none;
-    cursor:pointer;
-    -webkit-transition:0.15s ease-out;
-    -o-transition:0.15s ease-out;
-    transition:0.15s ease-out; 
-}
-
-/* add ticket section */
-
-
-.add-ticket-form{
+.edit-ticket-form{
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
@@ -833,7 +555,7 @@ body{
     margin-top:20px;
 }
 
-.add-ticket-form .backInfo-Btn{
+.edit-ticket-form .backInfo-Btn{
     width:90%;
     display:-webkit-box;
     display:-ms-flexbox;
@@ -887,7 +609,7 @@ body{
 
 .add-content form h2{
     color:#6600ff;
-    background:#d7d7d7;
+    background:#fff;
     padding:0 10px;
     font-family: 'Lobster', cursive;
     position:absolute;
@@ -898,12 +620,22 @@ body{
 .add-content form .inputs{
     display:-ms-grid;
     display:grid;
-    -ms-grid-columns: 1fr;
-    grid-template-columns: repeat(1,1fr);
+    -ms-grid-columns: 1fr 30px 1fr;
+    grid-template-columns: repeat(2,1fr);
     gap:30px;
 }
 .add-content form .input{
     position:relative;
+}
+
+.add-content .modal{
+    display:none;
+    text-align:center;
+    font-size:1rem;
+    border-radius:10px;
+    background:red;
+    font-family: 'Titillium Web', sans-serif;
+    color:#f2eaff;
 }
 
 .add-content .modal ul {
@@ -913,15 +645,16 @@ body{
     width:100%;
     font-size:1.2rem;
     color:#6600ff;
-    padding:12px 24px;
+    padding:5px 10px;
     background: none;
     border:1px solid rgb(119, 32, 249);
     outline:none;
     border-radius:10px;
 }
 
-.add-content form .input{
-    grid-column:1/-1;
+.add-content form .input:nth-child(3),
+.add-content form .input:last-child{
+    grid-column:1/-1
 }
 
 .add-content form .input .show-pass{
@@ -956,7 +689,7 @@ body{
     position:absolute;
     left:15px;
     top:-10px;
-    background:#d7d7d7;
+    background:#fff;
     color:rgb(119, 32, 249);
     padding:0 10px;
 }
@@ -1036,6 +769,20 @@ body{
     font-family: 'Righteous', cursive;
 }
 
+.add-content .modal{
+    display:none;
+    text-align:center;
+    font-size:1rem;
+    border-radius:10px;
+    background:red;
+    font-family: 'Titillium Web', sans-serif;
+    color:#f2eaff;
+}
+
+.add-content .modal ul {
+    list-style:none;
+}
+
 .back-to-infos{
     background:-o-linear-gradient(45deg , #4700b1 , #7f2aff);
     background:linear-gradient(45deg , #4700b1 , #7f2aff);
@@ -1045,178 +792,9 @@ body{
     border:none;
     outline:none;
     cursor:pointer;
-}
-
-/* .modal */
-
-.modal-add-ticket-details{
-    background:#fff;
-    border-radius:12px;
-    padding:8px 12px;
-    min-width:500px;
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    gap:20px;
-    -webkit-box-orient:vertical;
-    -webkit-box-direction:normal;
-        -ms-flex-direction:column;
-            flex-direction:column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    position:absolute;
-    top:-200%;
-    left:50%;
-    -webkit-transform:translate(-50%, -50%);
-        -ms-transform:translate(-50%, -50%);
-            transform:translate(-50%, -50%);
-    -webkit-transition:0.5s ease-in-out;
-    -o-transition:0.5s ease-in-out;
-    transition:0.5s ease-in-out;
-
-}
-
-.modal-add-ticket-details.active{
-    top:60%;
-}
-
-.modal-add-ticket-details .ticket-info-tips{
-    text-align:center;
-    color:rgb(255, 70, 70);
-    font-family: 'Lobster', cursive;
-}
-.modal-add-ticket-details .ticket-info{
-    width:100%;
-}
-
-.modal-add-ticket-details .ticket-info .ticket-information{
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-pack:justify;
-        -ms-flex-pack:justify;
-            justify-content:space-between;
-    -webkit-box-align:center;
-        -ms-flex-align:center;
-            align-items:center;
-    padding:5px;
-    width:100%;
-    pointer-events: none;
-    user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-}
-
-.modal-add-ticket-details .ticket-info .ticket-information:not(.container .content .ticket-info .ticket-information:last-child){
-    border-bottom:1px solid #371b58a6;
-}
-
-.modal-add-ticket-details .ticket-info .ticket-information .info-title{
-    color:#2E0249;
-    font-family: 'Merienda', cursive;
-}
-
-.modal-add-ticket-details .ticket-info .ticket-information .ticketInfo{
-    color:#1e0052c5;
-    font-family: 'Lobster', cursive;
-    width:50%;
-    font-size:0.75rem;
-}
-
-.modal-add-ticket-details .ticket-info .ticket-information .info-title{
-    font-size:1rem;
-}
-
-.modal-add-ticket-details .add-ticket-btns button{
-    padding:12px 24px;
-    border-radius:8px;
-    border:none;
-    background:#4700b1;
-    color:#fff;
-    cursor:pointer;
-    font-family: 'Lobster', cursive;
-}
-
-.modal-add-ticket-details .add-ticket-btns #cancel-btn{
-    background:rgb(255, 48, 48) !important;
-}
-
-/* delete modal */
-.delete-modal{
-    position:absolute;
-    width:450px;
-    top:-200%;
-    left:50%;
-    background:#fff;
-    transform:translate(-50%);
-    box-shadow: 0px 0px 100px 1px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-    overflow: hidden;
-    transition:0.4s ease-out;
-}
-
-.delete-modal.active{
-    top:35%;
-}
-
-.delete-modal .content{
-    padding:15px 10px;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-
-.delete-modal .content h3{
-    text-transform: capitalize;
-    font-family:'Radio Canada', sans-serif;
-}
-
-.delete-modal .content p{
-    font-family:'Radio Canada', sans-serif;
-    color:rgba(0, 0, 0, 0.634);
-    
-}
-
-.delete-modal .btns{
-    background:rgb(191, 191, 191);
-    width:100%;
-    padding:5px 10px;
-    text-align:right;
-}
-
-.delete-modal button{
-    padding:10px 18px;
-    border-radius:5px;
-    border:none;
-    outline:none;
-    cursor:pointer;
-    color:#fff;
-    font-family:'Radio Canada', sans-serif;
-    transition:background-color 0.15s ease-in-out;
-}
-
-.delete-modal .cancel-btn{
-    background:none;
-}
-
-.delete-modal .cancel-btn:hover{
-    background:#cdcdcd;
-}
-
-.delete-modal .delete-btn{
-    background:rgb(252, 50, 50);
-}
-
-.delete-modal .delete-btn:hover{
-    background:rgb(213, 45, 45);
+    -webkit-transition:0.15s ease-out;
+    -o-transition:0.15s ease-out;
+    transition:0.15s ease-out; 
 }
 
 /* errors */
@@ -1235,90 +813,66 @@ body{
 
 /* media  queries*/
 @media (max-width : 1120px){
-    .edit-user-form{
-        width:650px;
-    }
 
-    .container .content .userProfile .profile-desc .username{
+    .container .content .ticketProfile .profile-desc .username{
         font-size:1.1rem !important;
     }
 
-    .container .content .user-info .user-information .userInfo{
+    .container .content .ticket-info .ticket-information .ticketInfo{
         width:60%;
         font-size: 0.75rem;
     }
 
-    .container .content .user-info .user-information .info-title{
+    .container .content .ticket-info .ticket-information .info-title{
         font-size:0.9rem;
     }
 
-    .container .content .userProfile .profile-desc .fullname{
+    .container .content .ticketProfile .profile-desc .fullname{
         font-size:1rem !important;
     }
 
-    .container .content .userProfile .btns{
-        -webkit-box-orient:vertical;
-        -webkit-box-direction:normal;
-            -ms-flex-direction:column;
-                flex-direction:column;
-    }
-
-    .container .content .userProfile .btns button{
-        width: 100%;
-    }
 }
 
 @media (max-width : 800px){
-    .edit-user-form{
-        width:650px;
-    }
 
-    .container .content .userProfile .profile-desc .username{
+    .container .content .ticketProfile .profile-desc .username{
         font-size:1.5rem ;
     }
 
     .container .content {
-        -ms-grid-rows: repeat(4,1fr);
-        grid-template-rows: repeat(8,1fr);
+        -ms-grid-rows: repeat(5,1fr);
+        grid-template-rows: repeat(5,1fr);
     }
 
     .content .purchased-tickets-table{
-        grid-row:5/-1;
+        grid-row:4/-1;
     }
 
-    .container .content .user-info{
-        -ms-grid-row:3;
+    .container .content .ticket-info{
+        -ms-grid-row:2;
         -ms-grid-row-span:2;
-        grid-row:3/5;
+        grid-row:2/4;
         grid-column:1/-1;
     }
     
-    .container .content .userProfile{
+    .container .content .ticketProfile{
         grid-column:1/-1;
+        -ms-grid-row:1;
+        -ms-grid-row-span:1;
+        grid-row:1/2;
     }
 
-    .container .content .user-info .user-information .userInfo{
+    .container .content .ticket-info .ticket-information .ticketInfo{
         width:50%;
         font-size: 1.1rem;
     }
 
-    .container .content .user-info .user-information .info-title{
+    .container .content .ticket-info .ticket-information .info-title{
         font-size:1.25rem;
     }
 
-    .container .content .userProfile .profile-desc .fullname{
+    .container .content .ticketProfile .profile-desc .fullname{
         font-size:1.5rem ;
-    }
-
-    .container .content .userProfile .btns{
-        -webkit-box-orient:horizontal !important;
-        -webkit-box-direction:normal !important;
-            -ms-flex-direction:row !important;
-                flex-direction:row !important;
-    }
-
-    .container .content .userProfile .btns button{
-        width: 100%;
     }
 
     .content .purchased-tickets-table table thead th{
@@ -1331,82 +885,67 @@ body{
 }
 
 @media (max-width : 900px){
-    .edit-user-form{
-        width:650px;
-    }
 
-    .container .content .userProfile .profile-desc .username{
+    .container .content .ticketProfile .profile-desc .username{
         font-size:1.1rem !important;
     }
 
-    .container .content .user-info .user-information .userInfo{
+    .container .content .ticket-info .ticket-information .ticketInfo{
         width:60%;
         font-size: 0.75rem;
     }
 
-    .container .content .user-info .user-information .info-title{
+    .container .content .ticket-info .ticket-information .info-title{
         font-size:0.9rem;
     }
 
-    .container .content .userProfile .profile-desc .fullname{
+    .container .content .ticketProfile .profile-desc .fullname{
         font-size:1rem !important;
     }
 
-    .container .content .userProfile .btns{
-        -webkit-box-orient:vertical;
-        -webkit-box-direction:normal;
-            -ms-flex-direction:column;
-                flex-direction:column;
-    }
-
-    .container .content .userProfile .btns button{
-        width: 100%;
-    }
 }
 
 @media (max-width : 720px){
-    .edit-user-form{
-        width:450px;
-    }
-    .edit-user-form .signUp-form .input-container:nth-child(1){
+    .edit-ticket-form .signUp-form .input-container:nth-child(1){
         grid-column: 1/-1;
     }
-    .edit-user-form .signUp-form .input-container:nth-child(2){
+    .edit-ticket-form .signUp-form .input-container:nth-child(2){
         grid-column: 1/-1;
     }
-    .edit-user-form .signUp-form .input-container:nth-child(4){
+    .edit-ticket-form .signUp-form .input-container:nth-child(4){
         grid-column: 1/-1;
     }
-    .edit-user-form .signUp-form .input-container:nth-child(5){
+    .edit-ticket-form .signUp-form .input-container:nth-child(5){
         grid-column: 1/-1;
+    }
+    .add-content form .input{
+        grid-column:1/-1
     }
 }
 
+
 @media (max-width : 510px){
-    .edit-user-form{
-        width:335px;
-    }
-    .edit-user-form .signUp-form .input-container:nth-child(1){
+    .edit-ticket-form .signUp-form .input-container:nth-child(1){
         grid-column: 1/-1;
     }
-    .edit-user-form .signUp-form .input-container:nth-child(2){
+    .edit-ticket-form .signUp-form .input-container:nth-child(2){
         grid-column: 1/-1;
     }
-    .edit-user-form .signUp-form .input-container:nth-child(4){
+    .edit-ticket-form .signUp-form .input-container:nth-child(4){
         grid-column: 1/-1;
     }
-    .edit-user-form .signUp-form .input-container:nth-child(5){
+    .edit-ticket-form .signUp-form .input-container:nth-child(5){
         grid-column: 1/-1;
     }
     .form-inputs .login-inputs-container{
         width:100%;
     }
 
-    .container .content .user-info{
+    .container .content .ticket-info{
         padding: 5px 10px;
     }
 
-    .container .content .user-info .user-information{
+    .container .content .ticket-info .ticket-information{
         -webkit-box-orient:vertical !important;
         -webkit-box-direction:normal !important;
             -ms-flex-direction:column !important;
@@ -1419,51 +958,8 @@ body{
                 align-items: start;
     }
 
-    .modal-add-ticket-details .ticket-info .ticket-information{
-        -webkit-box-orient:vertical;
-        -webkit-box-direction:normal;
-            -ms-flex-direction:column;
-                flex-direction:column;
-        -webkit-box-pack: start;
-            -ms-flex-pack: start;
-                justify-content: flex-start;
-        -webkit-box-align: start;
-            -ms-flex-align: start;
-                align-items: flex-start;
-    }
-    .modal-add-ticket-details{
-        min-width:300px;
-    }
-
-    .modal-add-ticket-details .ticket-info-tips{
-        font-size:0.8rem;
-    }
-
     .add-content form h2{
+        font-size:1rem;
         top:-15px;
-        font-size:1rem;
-    }
-
-    .container .content .userProfile .btns{
-        -webkit-box-orient:vertical !important;
-        -webkit-box-direction:normal !important;
-            -ms-flex-direction:column !important;
-                flex-direction:column !important;
-    }
-
-    .container .content .userProfile .btns button{
-        width: 100%;
-    }
-
-    .delete-modal{
-        width:85% !important;
-    }
-
-    .delete-modal .content h3{
-        font-size:1rem;
-    }
-
-    .delete-modal .content p{
-        font-size:0.9rem;
     }
 }
